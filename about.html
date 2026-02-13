@@ -624,7 +624,909 @@
       </div></section>
           
     </section>
-                
+                                      <!-- Services Section -->
+    <section id="services" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-4 glow-text">Terminal</h2>
+                <p class="text-xl text-gray-400"></p>
+                <div class="w-32 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-4"></div>
+            </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+       <a href=" <!doctype html>
+<html lang="tr">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarTechnology.space - Gelecek Teknoloji Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+ @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+ 
+ :root {
+ --cyber-blue: #00f5ff;
+ --cyber-purple: #8a2be2;
+ --cyber-pink: #ff1493;
+ --cyber-green: #39ff14;
+ --dark-bg: #0a0a0a;
+ --grid-color: rgba(0, 245, 255, 0.1);
+ }
+ 
+ html, body {
+ height: 100%;
+ width: 100%;
+ }
+ 
+ body {
+ font-family: 'Rajdhani', sans-serif;
+ background: var(--dark-bg);
+ overflow-x: hidden;
+ }
+ 
+ .cyber-font {
+ font-family: 'Orbitron', monospace;
+ }
+ 
+ .cyber-grid {
+ background-image: 
+ linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px),
+ linear-gradient(90deg, rgba(0, 245, 255, 0.1) 1px, transparent 1px);
+ background-size: 50px 50px;
+ animation: grid-move 20s linear infinite;
+ }
+ 
+ @keyframes grid-move {
+ 0% { background-position: 0 0; }
+ 100% { background-position: 50px 50px; }
+ }
+ 
+ .glow-text {
+ text-shadow: 0 0 10px var(--cyber-blue), 0 0 20px var(--cyber-blue), 0 0 30px var(--cyber-blue);
+ }
+ 
+ .glow-border {
+ box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), inset 0 0 20px rgba(0, 245, 255, 0.1);
+ border: 1px solid var(--cyber-blue);
+ }
+ 
+ .cyber-button {
+ background: linear-gradient(45deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+ border: 1px solid var(--cyber-blue);
+ position: relative;
+ overflow: hidden;
+ transition: all 0.3s ease;
+ }
+ 
+ .cyber-button:hover {
+ box-shadow: 0 0 30px rgba(0, 245, 255, 0.7);
+ transform: translateY(-2px);
+ }
+ 
+ .cyber-button::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: -100%;
+ width: 100%;
+ height: 100%;
+ background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+ transition: left 0.5s;
+ }
+ 
+ .cyber-button:hover::before {
+ left: 100%;
+ }
+ 
+ .floating {
+ animation: float 6s ease-in-out infinite;
+ }
+ 
+ @keyframes float {
+ 0%, 100% { transform: translateY(0px); }
+ 50% { transform: translateY(-20px); }
+ }
+ 
+ .pulse-ring {
+ animation: pulse-ring 2s infinite;
+ }
+ 
+ @keyframes pulse-ring {
+ 0% { transform: scale(1); opacity: 1; }
+ 100% { transform: scale(2); opacity: 0; }
+ }
+ 
+ .data-stream {
+ position: absolute;
+ width: 2px;
+ height: 100px;
+ background: linear-gradient(to bottom, transparent, var(--cyber-green), transparent);
+ animation: data-flow 3s linear infinite;
+ }
+ 
+ @keyframes data-flow {
+ 0% { transform: translateY(-100px); opacity: 0; }
+ 50% { opacity: 1; }
+ 100% { transform: translateY(100vh); opacity: 0; }
+ }
+ 
+ .hologram {
+ background: linear-gradient(45deg, 
+ rgba(0, 245, 255, 0.1) 0%,
+ rgba(138, 43, 226, 0.1) 25%,
+ rgba(255, 20, 147, 0.1) 50%,
+ rgba(57, 255, 20, 0.1) 75%,
+ rgba(0, 245, 255, 0.1) 100%);
+ background-size: 400% 400%;
+ animation: hologram-shift 4s ease-in-out infinite;
+ }
+ 
+ @keyframes hologram-shift {
+ 0%, 100% { background-position: 0% 50%; }
+ 50% { background-position: 100% 50%; }
+ }
+ 
+ /* Terminal Styles */
+ .terminal-wrapper {
+ width: 100%;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ background: rgba(3, 7, 18, 0.95);
+ border: 2px solid var(--cyber-blue);
+ box-shadow: 0 0 20px rgba(0, 245, 255, 0.3), inset 0 0 20px rgba(0, 245, 255, 0.1);
+ position: relative;
+ overflow: hidden;
+ }
+ 
+ .terminal-wrapper::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ pointer-events: none;
+ background: linear-gradient(
+ 0deg,
+ rgba(0, 255, 0, 0.03) 1px,
+ transparent 1px
+ );
+ background-size: 100% 2px;
+ animation: scanlines 8s linear infinite;
+ z-index: 1;
+ }
+ 
+ @keyframes scanlines {
+ 0% { transform: translateY(0); }
+ 100% { transform: translateY(10px); }
+ }
+ 
+ .terminal-header {
+ background: linear-gradient(90deg, #1a0033, #330066, #1a0033);
+ padding: 12px 20px;
+ border-bottom: 2px solid #ff00ff;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+ position: relative;
+ z-index: 2;
+ }
+ 
+ .terminal-title {
+ font-size: 16px;
+ font-weight: bold;
+ color: var(--cyber-blue);
+ text-shadow: 0 0 10px var(--cyber-blue);
+ letter-spacing: 2px;
+ }
+ 
+ .terminal-status {
+ display: flex;
+ gap: 15px;
+ font-size: 12px;
+ color: var(--cyber-green);
+ }
+ 
+ .status-item {
+ display: flex;
+ align-items: center;
+ gap: 5px;
+ }
+ 
+ .status-light {
+ width: 8px;
+ height: 8px;
+ background: var(--cyber-green);
+ border-radius: 50%;
+ box-shadow: 0 0 5px var(--cyber-green);
+ animation: pulse 1.5s ease-in-out infinite;
+ }
+ 
+ @keyframes pulse {
+ 0%, 100% { opacity: 1; }
+ 50% { opacity: 0.5; }
+ }
+ 
+ .terminal-content {
+ flex: 1;
+ overflow-y: auto;
+ overflow-x: hidden;
+ padding: 20px;
+ background: rgba(3, 7, 18, 0.9);
+ position: relative;
+ z-index: 2;
+ scrollbar-width: thin;
+ scrollbar-color: var(--cyber-blue) rgba(0, 255, 255, 0.1);
+ }
+ 
+ .terminal-content::-webkit-scrollbar {
+ width: 8px;
+ }
+ 
+ .terminal-content::-webkit-scrollbar-track {
+ background: rgba(0, 255, 255, 0.1);
+ }
+ 
+ .terminal-content::-webkit-scrollbar-thumb {
+ background: var(--cyber-blue);
+ border-radius: 4px;
+ box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+ }
+ 
+ .terminal-line {
+ margin-bottom: 8px;
+ line-height: 1.6;
+ word-break: break-word;
+ font-size: 13px;
+ }
+ 
+ .command-prompt {
+ color: var(--cyber-pink);
+ font-weight: bold;
+ }
+ 
+ .command-text {
+ color: var(--cyber-blue);
+ margin-left: 5px;
+ }
+ 
+ .output {
+ color: var(--cyber-green);
+ white-space: pre-wrap;
+ }
+ 
+ .error {
+ color: #ff0066;
+ }
+ 
+ .welcome {
+ color: #ffff00;
+ animation: fadeIn 1s ease-in;
+ }
+ 
+ @keyframes fadeIn {
+ from { opacity: 0; }
+ to { opacity: 1; }
+ }
+ 
+ .terminal-input-area {
+ background: rgba(0, 0, 0, 0.5);
+ border-top: 2px solid var(--cyber-green);
+ padding: 15px 20px;
+ display: flex;
+ gap: 10px;
+ align-items: center;
+ position: relative;
+ z-index: 2;
+ box-shadow: inset 0 2px 10px rgba(0, 255, 0, 0.1);
+ }
+ 
+ .input-prompt {
+ color: var(--cyber-pink);
+ font-weight: bold;
+ font-size: 14px;
+ flex-shrink: 0;
+ }
+ 
+ .terminal-input-wrapper {
+ flex: 1;
+ display: flex;
+ align-items: center;
+ border: 1px solid var(--cyber-blue);
+ background: rgba(3, 7, 18, 0.8);
+ padding: 5px 10px;
+ box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.2);
+ }
+ 
+ .terminal-input {
+ flex: 1;
+ background: transparent;
+ border: none;
+ color: var(--cyber-blue);
+ font-family: 'Courier New', monospace;
+ font-size: 14px;
+ outline: none;
+ caret-color: var(--cyber-blue);
+ }
+ 
+ .terminal-input::placeholder {
+ color: rgba(0, 255, 255, 0.5);
+ }
+ 
+ .cursor {
+ width: 2px;
+ height: 16px;
+ background: var(--cyber-blue);
+ animation: blink 1s infinite;
+ margin-left: 3px;
+ }
+ 
+ @keyframes blink {
+ 0%, 49% { opacity: 1; }
+ 50%, 100% { opacity: 0; }
+ }
+ 
+ .send-btn {
+ background: linear-gradient(135deg, var(--cyber-pink), var(--cyber-blue));
+ border: none;
+ color: #000;
+ padding: 8px 16px;
+ border-radius: 4px;
+ cursor: pointer;
+ font-weight: bold;
+ font-size: 12px;
+ transition: all 0.3s ease;
+ box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+ }
+ 
+ .send-btn:hover {
+ box-shadow: 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(0, 255, 255, 0.6);
+ transform: scale(1.05);
+ }
+ 
+ .send-btn:active {
+ transform: scale(0.95);
+ }
+ 
+ /* Navigation */
+ nav {
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ z-index: 50;
+ background: rgba(10, 10, 10, 0.8);
+ backdrop-filter: blur(10px);
+ }
+ 
+ .nav-container {
+ max-width: 1400px;
+ margin: 0 auto;
+ padding: 1rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
+ 
+ .logo {
+ color: var(--cyber-blue);
+ font-size: 24px;
+ font-weight: 900;
+ letter-spacing: 3px;
+ text-shadow: 0 0 10px var(--cyber-blue);
+ }
+ 
+ .nav-links {
+ display: flex;
+ gap: 2rem;
+ }
+ 
+ .nav-link {
+ color: var(--cyber-blue);
+ text-decoration: none;
+ position: relative;
+ transition: all 0.3s ease;
+ cursor: pointer;
+ }
+ 
+ .nav-link::after {
+ content: '';
+ position: absolute;
+ bottom: -5px;
+ left: 0;
+ width: 0;
+ height: 2px;
+ background: var(--cyber-pink);
+ transition: width 0.3s ease;
+ }
+ 
+ .nav-link:hover::after {
+ width: 100%;
+ }
+ 
+ /* Main Container */
+ .main-wrapper {
+ width: 100%;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ }
+ 
+ .content-area {
+ flex: 1;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 2rem;
+ padding: 120px 2rem 2rem;
+ max-width: 1400px;
+ margin: 0 auto;
+ width: 100%;
+ }
+ 
+ .section {
+ padding: 2rem;
+ border-radius: 10px;
+ }
+ 
+ .section-title {
+ font-size: 28px;
+ font-weight: 900;
+ color: var(--cyber-blue);
+ margin-bottom: 1.5rem;
+ text-shadow: 0 0 10px var(--cyber-blue);
+ }
+ 
+ .section-description {
+ color: rgba(0, 245, 255, 0.7);
+ margin-bottom: 2rem;
+ line-height: 1.8;
+ }
+ 
+ .terminal-container {
+ background: rgba(3, 7, 18, 0.7);
+ border: 2px solid var(--cyber-blue);
+ border-radius: 10px;
+ overflow: hidden;
+ box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+ height: 500px;
+ }
+ 
+ .features-list {
+ display: flex;
+ flex-direction: column;
+ gap: 1.5rem;
+ }
+ 
+ .feature-item {
+ padding: 1.5rem;
+ background: linear-gradient(135deg, rgba(0, 245, 255, 0.05), rgba(138, 43, 226, 0.05));
+ border-left: 3px solid var(--cyber-pink);
+ border-radius: 5px;
+ transition: all 0.3s ease;
+ cursor: pointer;
+ }
+ 
+ .feature-item:hover {
+ background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(138, 43, 226, 0.1));
+ transform: translateX(10px);
+ box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+ }
+ 
+ .feature-title {
+ color: var(--cyber-pink);
+ font-weight: 700;
+ margin-bottom: 0.5rem;
+ }
+ 
+ .feature-desc {
+ color: rgba(0, 245, 255, 0.6);
+ font-size: 14px;
+ }
+ 
+ @media (max-width: 768px) {
+ .content-area {
+ grid-template-columns: 1fr;
+ padding-top: 80px;
+ }
+ 
+ .nav-links {
+ gap: 1rem;
+ }
+ 
+ .terminal-container {
+ height: 400px;
+ }
+ }
+ </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="cyber-grid"><!-- Navigation -->
+  <nav>
+   <div class="nav-container">
+    <div class="logo cyber-font">
+     ⟡ STAR.TECH ⟡
+    </div>
+    <div class="nav-links"><span class="nav-link" onclick="scrollToTerminal()">Terminal</span> <span class="nav-link">Teknoloji</span> <span class="nav-link">Hakkında</span>
+    </div>
+   </div>
+  </nav><!-- Main Wrapper -->
+  <div class="main-wrapper">
+   <div class="content-area"><!-- Left Panel - Features -->
+    <div class="section">
+     <h1 class="section-title cyber-font">◆ YÖNETİM PANELİ ◆</h1>
+     <p class="section-description">StarTechnology.space'e hoşgeldiniz. Gelişmiş terminal sistemi ile siber dünyaya bağlanın.</p>
+     <div class="features-list">
+      <div class="feature-item">
+       <div class="feature-title">
+        ⚡ Gerçek Zamanlı İşlem
+       </div>
+       <div class="feature-desc">
+        Komutlar anında işleniyor
+       </div>
+      </div>
+      <div class="feature-item">
+       <div class="feature-title">
+        🔐 Güvenlik Sistemi
+       </div>
+       <div class="feature-desc">
+        Şifreli bağlantı protokolü
+       </div>
+      </div>
+      <div class="feature-item">
+       <div class="feature-title">
+        🌐 Ağ Entegrasyonu
+       </div>
+       <div class="feature-desc">
+        Küresel sistem ağına erişim
+       </div>
+      </div>
+      <div class="feature-item">
+       <div class="feature-title">
+        📊 Veri Analitikleri
+       </div>
+       <div class="feature-desc">
+        Gelişmiş analiz araçları
+       </div>
+      </div>
+      <div class="feature-item">
+       <div class="feature-title">
+        🤖 AI İntegrasyonu
+       </div>
+       <div class="feature-desc">
+        Yapay zeka destekli sistemler
+       </div>
+      </div>
+     </div>
+    </div><!-- Right Panel - Terminal -->
+    <div class="section">
+     <h1 class="section-title cyber-font" id="terminalTitle">◆ CYBERPUNK TERMINAL ◆</h1>
+     <div class="terminal-container" id="terminalWrapper">
+      <div class="terminal-wrapper">
+       <div class="terminal-header">
+        <div class="terminal-title">
+         ◆ CYBERPUNK TERMINAL v2.4.7 ◆
+        </div>
+        <div class="terminal-status">
+         <div class="status-item"><span class="status-light"></span> <span>ONLINE</span>
+         </div>
+         <div class="status-item"><span class="status-light"></span> <span>ACTIVE</span>
+         </div>
+        </div>
+       </div>
+       <div class="terminal-content" id="terminalContent"></div>
+       <div class="terminal-input-area"><span class="input-prompt">$</span>
+        <div class="terminal-input-wrapper"><input type="text" class="terminal-input" id="terminalInput" placeholder="Komut girin... (help yazarak komutları görün)" autocomplete="off">
+         <div class="cursor"></div>
+        </div><button class="send-btn" id="sendBtn">GÖNDERİ</button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <script>
+ // Terminal Logic
+ const terminalContent = document.getElementById('terminalContent');
+ const terminalInput = document.getElementById('terminalInput');
+ const sendBtn = document.getElementById('sendBtn');
+ let commandHistory = [];
+ let historyIndex = -1;
+
+ // Terminal Commands
+ const commands = {
+ help: () => {
+ return `
+╔════════════════════════════════════════════════════════════════╗
+║                    KULLANILABILIR KOMUTLAR                     ║
+╚════════════════════════════════════════════════════════════════╝
+
+📋 SİSTEM KOMUTLARI:
+  • help              - Komut listesini göster
+  • clear             - Terminal'ı temizle
+  • date              - Tarih ve saati göster
+  • time              - Geçerli saati göster
+  • whoami            - Sistem kullanıcısı
+  • pwd               - Çalışma dizini
+  • echo [TEXT]       - Metni yaz
+  • calc [IŞLEM]      - Basit hesaplamalar (örn: calc 5+3*2)
+
+🎮 EĞLENCELİ KOMUTLAR:
+  • hack              - Hacker modu
+  • matrix            - Matrix animasyonu
+  • disco             - Disco modu
+  • weather           - Hava durumu
+  • fortune           - Rastgele söz
+
+📊 ARAÇLAR:
+  • neofetch          - Sistem bilgisi
+  • ls                - Dosyaları listele
+  • tree              - Dizin yapısı
+  • ipconfig          - Ağ bilgisi
+  • systeminfo        - Sistem detayları
+`;
+ },
+
+ clear: () => {
+ terminalContent.innerHTML = '';
+ return null;
+ },
+
+ date: () => {
+ const now = new Date();
+ return `📅 ${now.toLocaleDateString('tr-TR', { 
+ weekday: 'long', 
+ year: 'numeric', 
+ month: 'long', 
+ day: 'numeric' 
+ })}`;
+ },
+
+ time: () => {
+ const now = new Date();
+ return `🕐 ${now.toLocaleTimeString('tr-TR')}`;
+ },
+
+ whoami: () => {
+ return `USER: CYBERPUNK_ADMIN\nHOST: NEO-TOKYO-SERVER-7\nPERMISSIONS: UNRESTRICTED`;
+ },
+
+ pwd: () => {
+ return `/root/cyberpunk/terminal`;
+ },
+
+ echo: (args) => {
+ return args || 'Boş mesaj';
+ },
+
+ calc: (expression) => {
+ try {
+ const result = eval(expression.replace(/[^0-9+\-*/().]/g, ''));
+ return `= ${result}`;
+ } catch {
+ return '❌ Hatalı işlem!';
+ }
+ },
+
+ hack: () => {
+ return `
+⚠️  FİREWALL İHLAL EDİLİYOR...
+🔓 KOD ÇATISI BAŞARILI
+💾 VERİ TRANSFERİ: %${Math.floor(Math.random() * 100)}
+🎯 BAŞARILANDI - Sistem kontrolü ele geçirildi!
+`;
+ },
+
+ matrix: () => {
+ let output = '';
+ for (let i = 0; i < 15; i++) {
+ output += Math.random().toString(2).substring(2).substring(0, 40) + '\n';
+ }
+ return output;
+ },
+
+ disco: () => {
+ return `
+🎨 DİSCO MODU AKTİF
+💡 IŞIKLAR YANIP SÖNÜYOR...
+🎵 MÜZİK ÇALINIYOR...
+🕺 DANS ET ve EĞLEN!
+`;
+ },
+
+ weather: () => {
+ const temps = ['☀️  25°C', '🌧️  18°C', '⛅ 22°C', '🌩️  15°C'];
+ const weather = ['Açık', 'Yağmurlu', 'Bulutlu', 'Fırtınalı'];
+ const idx = Math.floor(Math.random() * temps.length);
+ return `
+NEO-TOKYO HAva Durumu:
+${temps[idx]} - ${weather[idx]}
+Nem: %${Math.floor(Math.random() * 100)}
+Rüzgar: ${Math.floor(Math.random() * 50)} km/s
+`;
+ },
+
+ fortune: () => {
+ const fortunes = [
+ '💎 "Gelecek teknoloji yok, sadece bugünün geleceği var."',
+ '🤖 "Kod yazma, hayat yaz."',
+ '⚡ "Eğer hata almıyorsan, yeterince hızlı gitmedin."',
+ '🌌 "Dijital evren sonsuzdur, keşfet!"',
+ '🔮 "Bir yazılımcının üstün olduğu tek şey: bugları bulmada."'
+ ];
+ return fortunes[Math.floor(Math.random() * fortunes.length)];
+ },
+
+ neofetch: () => {
+ return `
+╔═══════════════════════════════════════════╗
+║      CYBERPUNK SYSTEM INFORMATION         ║
+╚═══════════════════════════════════════════╝
+
+OS: Cyberpunk Linux 2.4.7
+Kernel: NeoTokyo-5.15
+Uptime: 9999 days
+CPU: Quantum Processor v7
+RAM: 1024GB Cybernetic Memory
+GPU: Holographic RTX ∞
+Resolution: 8K Neuro-Vision
+`;
+ },
+
+ ls: () => {
+ return `
+📁 Dizin İçeriği:
+  drwx------ cyberpunk_core
+  -rw------- system_config.dat
+  -rw------- secret_data.enc
+  drwx------ neural_network
+  -rw------- encrypted_files.zip
+  lrwx------ portal -> /dev/singularity
+`;
+ },
+
+ tree: () => {
+ return `
+/root/
+├── cyberpunk/
+│   ├── core/
+│   ├── modules/
+│   └── config/
+├── system/
+│   ├── drivers/
+│   └── kernel/
+└── data/
+    ├── encrypted/
+    └── archived/
+`;
+ },
+
+ ipconfig: () => {
+ return `
+Ağ Arayüzü Bilgisi:
+  Interface: eth0
+  IP Adresi: 192.168.2077.1
+  Gateway: 192.168.2077.254
+  DNS: 8.8.8.8
+  MAC: FF:00:FF:00:FF:00
+  Status: CONNECTED ✓
+`;
+ },
+
+ systeminfo: () => {
+ return `
+SİSTEM BİLGİLERİ:
+  Bilgisayar: CYBERPUNK-SERVER
+  İşletim Sistemi: Cyberpunk OS v2.4
+  İşletim Sistemi Sürümü: Advanced Edition
+  Sistem Türü: 64-bit
+  Kullanıcı: ADMIN
+  Sistem Başladığı Saat: ${new Date().toLocaleString('tr-TR')}
+`;
+ }
+ };
+
+ function printLine(text, type = 'output') {
+ const line = document.createElement('div');
+ line.className = `terminal-line ${type}`;
+ line.textContent = text;
+ terminalContent.appendChild(line);
+ terminalContent.scrollTop = terminalContent.scrollHeight;
+ }
+
+ function executeCommand(input) {
+ const trimmed = input.trim();
+ 
+ if (!trimmed) return;
+
+ printLine(`$ ${trimmed}`, 'command-prompt');
+ commandHistory.push(trimmed);
+ historyIndex = -1;
+
+ const parts = trimmed.split(' ');
+ const cmd = parts[0].toLowerCase();
+ const args = parts.slice(1).join(' ');
+
+ let output;
+ if (commands[cmd]) {
+ output = commands[cmd](args);
+ if (output) {
+ output.split('\n').forEach(line => {
+ if (line.trim()) printLine(line, 'output');
+ });
+ }
+ } else {
+ printLine(`❌ Komut bulunamadı: '${cmd}'. 'help' yazarak komutları görebilirsiniz.`, 'error');
+ }
+ }
+
+ sendBtn.addEventListener('click', () => {
+ const input = terminalInput.value;
+ if (input.trim()) {
+ executeCommand(input);
+ terminalInput.value = '';
+ }
+ });
+
+ terminalInput.addEventListener('keydown', (e) => {
+ if (e.key === 'Enter') {
+ const input = terminalInput.value;
+ if (input.trim()) {
+ executeCommand(input);
+ terminalInput.value = '';
+ }
+ } else if (e.key === 'ArrowUp') {
+ e.preventDefault();
+ if (historyIndex < commandHistory.length - 1) {
+ historyIndex++;
+ terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+ }
+ } else if (e.key === 'ArrowDown') {
+ e.preventDefault();
+ if (historyIndex > 0) {
+ historyIndex--;
+ terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+ } else if (historyIndex === 0) {
+ historyIndex = -1;
+ terminalInput.value = '';
+ }
+ }
+ });
+
+ terminalInput.addEventListener('focus', () => {
+ terminalInput.parentElement.style.boxShadow = 'inset 0 0 10px rgba(0, 255, 255, 0.5), 0 0 15px rgba(0, 255, 255, 0.3)';
+ });
+
+ terminalInput.addEventListener('blur', () => {
+ terminalInput.parentElement.style.boxShadow = 'inset 0 0 5px rgba(0, 255, 255, 0.2)';
+ });
+
+ function scrollToTerminal() {
+ document.getElementById('terminalWrapper').scrollIntoView({ behavior: 'smooth' });
+ terminalInput.focus();
+ }
+
+ // Welcome Message
+ window.addEventListener('load', () => {
+ printLine('╔════════════════════════════════════════════════════════════════╗', 'welcome');
+ printLine('║                  CYBERPUNK TERMINAL v2.4.7                      ║', 'welcome');
+ printLine('║              Advanced Biometric Access System                   ║', 'welcome');
+ printLine('╚════════════════════════════════════════════════════════════════╝', 'welcome');
+ printLine('', 'welcome');
+ printLine('Cyberpunk Terminal\'e hoşgeldiniz. İleri teknoloji sisteminiz başarıyla başlatıldı.', 'welcome');
+ printLine('', 'welcome');
+ printLine('💡 İpucu: "help" yazarak kullanılabilir komutları görebilirsiniz.', 'welcome');
+ printLine('', 'welcome');
+ 
+ terminalInput.focus();
+ });
+</script>
+  </div>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cd32beec26ae206',t:'MTc3MDk3MzYwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+           
            <!-- Services Section -->
     <section id="services" class="py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
