@@ -1,7 +1,4 @@
-![⌘ ⌥ ⍜ ⍟ ⍣ ⍤ ⍥ ⍨ ⍩ ⎔ ⎕ ⏣_⌘ ⌥ ⍜ ⍟ ⍣ ⍤ ⍥ ⍨ ⍩ ⎔ ⎕ ⏣_  ⌘ ⌥ ⍜ ⍟ ⍣ ⍤ ⍥ ⍨ ⍩ ⎔ ⎕ ⏣_Discriminant analysis clearly identifying Δ _ 0, Δ = 0, and Δ _ 0 scenarios  The system verifies solutions b - 2026-02-24T144317 111]()
 
-<img width="1556" height="2000" alt="Striking Logo with Quantum Nucleus Design" src="" />
-![asset-generation-7ebd3a2a-4989-41d2-bdba-6f50e289044e-1-small]()
 
 
 <p align="center" dir="auto">
