@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Cityscape</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes codeRain {
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
+        @keyframes hover {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes binaryTrail {
+            0% { width: 0; opacity: 0.9; }
+            100% { width: 150px; opacity: 0; }
+        }
+        
+        @keyframes neonPulse {
+            0%, 100% { 
+                text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 15px #ff00de, 0 0 25px #ff00de, 0 0 35px #ff00de, 0 0 45px #ff00de, 0 0 55px #ff00de;
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes cityGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        @keyframes reflection {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 0.5; transform: scaleY(1.05); }
+        }
+        
+        @keyframes colorShift {
+            0% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+            100% { filter: hue-rotate(0deg); }
+        }
+        
+        @keyframes buildingPulse {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.01); }
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translate(var(--moveX), var(--moveY)); opacity: 0; }
+        }
+        
+        @keyframes energyPulse {
+            0% { width: 5px; opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { width: 100%; opacity: 0; }
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateY(-5px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(5px); opacity: 0; }
+        }
+        
+        .code-rain {
+            position: absolute;
+            color: #0aff9d;
+            font-family: monospace;
+            font-size: 14px;
+            text-shadow: 0 0 8px #0aff9d, 0 0 12px rgba(10, 255, 157, 0.5);
+            white-space: nowrap;
+            animation: codeRain 15s linear infinite;
+            opacity: 0.9;
+            z-index: 1;
+        }
+        
+        .binary-trail {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(to left, rgba(0, 255, 255, 0), #00ffff);
+            animation: binaryTrail 2s linear forwards;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        
+        .flying-vehicle {
+            position: absolute;
+            animation: hover 4s ease-in-out infinite;
+            z-index: 2;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.7));
+        }
+        
+        .building {
+            position: relative;
+            overflow: hidden;
+            animation: cityGlow 8s ease-in-out infinite, buildingPulse 12s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+        }
+        
+        .building:hover {
+            filter: brightness(1.3) saturate(1.2);
+            transform: translateY(-5px);
+        }
+        
+        .neon-sign {
+            animation: neonPulse 2s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .neon-sign:hover {
+            transform: scale(1.1);
+        }
+        
+        .window {
+            transition: all 0.5s ease;
+        }
+        
+        .window:hover {
+            background-color: rgba(255, 255, 255, 0.7) !important;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+        
+        .reflection {
+            animation: reflection 5s infinite ease-in-out;
+        }
+        
+        .city-container {
+            animation: colorShift 30s infinite ease-in-out;
+        }
+        
+        .data-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: rgba(0, 255, 255, 0.8);
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+            animation: floatParticle var(--duration) linear forwards;
+            z-index: 3;
+        }
+        
+        .energy-pulse {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(to right, rgba(255, 0, 255, 0), rgba(255, 0, 255, 0.8), rgba(255, 0, 255, 0));
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            animation: energyPulse 3s linear forwards;
+            z-index: 1;
+        }
+        
+        .data-flow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(0, 255, 255, 0) 0%,
+                rgba(0, 255, 255, 0.05) 45%,
+                rgba(0, 255, 255, 0.1) 50%,
+                rgba(0, 255, 255, 0.05) 55%,
+                rgba(0, 255, 255, 0) 100%);
+            animation: dataFlow 3s infinite linear;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-indigo-900 via-purple-900 to-blue-900 h-screen overflow-hidden relative">
+    <!-- Sky background with enhanced gradient -->
+    <div class="absolute inset-0 bg-gradient-to-b from-indigo-900 via-purple-800 to-blue-900"></div>
+    
+    <!-- Stars -->
+    <div class="absolute inset-0" id="stars"></div>
+    
+    <!-- Data particles container -->
+    <div class="absolute inset-0" id="particles-container"></div>
+    
+    <!-- City skyline -->
+    <div class="city-container absolute bottom-0 w-full h-3/4 flex items-end justify-center">
+        <!-- Buildings -->
+        <div class="building w-24 h-96 bg-gradient-to-t from-gray-900 to-gray-800 mx-1 rounded-t-lg relative">
+            <div class="absolute inset-0 opacity-80 bg-gradient-to-t from-blue-500/30 to-transparent"></div>
+            <div class="absolute inset-0 opacity-50 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+            <div class="data-flow"></div>
+            <div class="absolute inset-2 grid grid-cols-4 grid-rows-10 gap-1" id="building1-windows">
+                <!-- Windows will be generated by JS -->
+            </div>
+        </div>
+        
+        <div class="building w-32 h-[28rem] bg-gradient-to-t from-gray-900 to-gray-800 mx-1 rounded-t-lg relative">
+            <div class="absolute inset-0 opacity-80 bg-gradient-to-t from-purple-500/30 to-transparent"></div>
+            <div class="absolute inset-0 opacity-50 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"></div>
+            <div class="data-flow"></div>
+            <div class="absolute inset-2 grid grid-cols-5 grid-rows-12 gap-1" id="building2-windows">
+                <!-- Windows will be generated by JS -->
+            </div>
+        </div>
+        
+        <div class="building w-40 h-[32rem] bg-gradient-to-t from-gray-900 to-gray-800 mx-1 rounded-t-lg relative">
+            <div class="absolute inset-0 opacity-80 bg-gradient-to-t from-cyan-500/30 to-transparent"></div>
+            <div class="absolute inset-0 opacity-50 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent"></div>
+            <div class="data-flow"></div>
+            <div class="absolute inset-2 grid grid-cols-6 grid-rows-14 gap-1" id="building3-windows">
+                <!-- Windows will be generated by JS -->
+            </div>
+        </div>
+        
+        <div class="building w-36 h-[30rem] bg-gradient-to-t from-gray-900 to-gray-800 mx-1 rounded-t-lg relative">
+            <div class="absolute inset-0 opacity-80 bg-gradient-to-t from-blue-500/30 to-transparent"></div>
+            <div class="absolute inset-0 opacity-50 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+            <div class="data-flow"></div>
+            <div class="absolute inset-2 grid grid-cols-5 grid-rows-13 gap-1" id="building4-windows">
+                <!-- Windows will be generated by JS -->
+            </div>
+        </div>
+        
+        <!-- Main skyscraper with code -->
+        <div class="building w-48 h-[36rem] bg-gradient-to-t from-gray-900 to-gray-800 mx-1 rounded-t-lg relative overflow-visible">
+            <div class="absolute inset-0 opacity-80 bg-gradient-to-t from-cyan-500/30 to-transparent"></div>
+            <div class="absolute inset-0 opacity-50 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent"></div>
+            <div class="data-flow"></div>
+            <div class="absolute inset-0 overflow-hidden" id="code-container">
+                <!-- JavaScript code will be added here -->
+            </div>
+            
+            <!-- Star Technology neon sign -->
+            <div class="absolute top-10 left-0 w-full flex justify-center">
+                <div id="neon-sign" class="neon-sign text-4xl font-bold text-pink-500 tracking-wider text-center">
+                    STAR<br>TECHNOLOGY
+                </div>
+            </div>
+            
+            <!-- Holographic display panel -->
+            <div class="absolute bottom-20 left-0 w-full flex justify-center">
+                <div class="w-32 h-16 rounded-lg bg-blue-500/20 border border-blue-400/50 flex items-center justify-center overflow-hidden">
+                    <div class="text-cyan-300 text-xs font-mono animate-pulse">
+                        SYSTEM ACTIVE
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="building w-28 h-[26rem] bg-gradient-to-t from-gray-900 to-gray-800 mx-1 rounded-t-lg relative">
+            <div class="absolute inset-0 opacity-80 bg-gradient-to-t from-purple-500/30 to-transparent"></div>
+            <div class="absolute inset-0 opacity-50 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"></div>
+            <div class="data-flow"></div>
+            <div class="absolute inset-2 grid grid-cols-4 grid-rows-11 gap-1" id="building5-windows">
+                <!-- Windows will be generated by JS -->
+            </div>
+        </div>
+        
+        <div class="building w-32 h-[28rem] bg-gradient-to-t from-gray-900 to-gray-800 mx-1 rounded-t-lg relative">
+            <div class="absolute inset-0 opacity-80 bg-gradient-to-t from-blue-500/30 to-transparent"></div>
+            <div class="absolute inset-0 opacity-50 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+            <div class="data-flow"></div>
+            <div class="absolute inset-2 grid grid-cols-5 grid-rows-12 gap-1" id="building6-windows">
+                <!-- Windows will be generated by JS -->
+            </div>
+        </div>
+        
+        <div class="building w-24 h-[24rem] bg-gradient-to-t from-gray-900 to-gray-800 mx-1 rounded-t-lg relative">
+            <div class="absolute inset-0 opacity-80 bg-gradient-to-t from-cyan-500/30 to-transparent"></div>
+            <div class="absolute inset-0 opacity-50 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent"></div>
+            <div class="data-flow"></div>
+            <div class="absolute inset-2 grid grid-cols-4 grid-rows-10 gap-1" id="building7-windows">
+                <!-- Windows will be generated by JS -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Flying vehicles container -->
+    <div id="vehicles-container" class="absolute inset-0"></div>
+    
+    <!-- Energy pulses container -->
+    <div id="energy-pulses" class="absolute inset-0"></div>
+    
+    <!-- Reflection overlay -->
+    <div class="reflection absolute bottom-0 w-full h-1/4 bg-gradient-to-t from-blue-900/60 to-transparent transform scale-y-[-1] origin-bottom opacity-40"></div>
+    
+    <script>
+        // Create stars with enhanced twinkle
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 300; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 60}%`;
+            star.style.opacity = Math.random() * 0.8 + 0.2;
+            
+            // Add twinkle animation with random delay
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            
+            // Add box shadow for glow effect
+            if (size > 2) {
+                star.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.8)';
+            }
+            
+            starsContainer.appendChild(star);
+        }
+        
+        // Generate windows for all buildings
+        function generateWindows(buildingId, cols, rows) {
+            const building = document.getElementById(buildingId);
+            building.innerHTML = '';
+            
+            for (let i = 0; i < rows * cols; i++) {
+                const window = document.createElement('div');
+                window.className = 'window rounded-sm';
+                
+                // Determine window color based on building
+                let baseColor;
+                if (buildingId.includes('1') || buildingId.includes('4') || buildingId.includes('6')) {
+                    baseColor = 'blue';
+                } else if (buildingId.includes('2') || buildingId.includes('5')) {
+                    baseColor = 'purple';
+                } else {
+                    baseColor = 'cyan';
+                }
+                
+                // Randomly light up some windows
+                const isLit = Math.random() > 0.7;
+                if (isLit) {
+                    window.style.backgroundColor = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.3})`;
+                    window.style.boxShadow = `0 0 5px rgba(255, 255, 255, 0.5)`;
+                } else {
+                    window.style.backgroundColor = `rgba(${baseColor === 'blue' ? '0, 100, 255' : 
+                                                    baseColor === 'purple' ? '128, 0, 255' : 
+                                                    '0, 200, 255'}, ${Math.random() * 0.2 + 0.1})`;
+                }
+                
+                // Add animation to some windows
+                if (Math.random() > 0.9) {
+                    window.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite ease-in-out`;
+                    window.style.animationDelay = `${Math.random() * 5}s`;
+                }
+                
+                building.appendChild(window);
+            }
+        }
+        
+        // Generate windows for all buildings
+        generateWindows('building1-windows', 4, 10);
+        generateWindows('building2-windows', 5, 12);
+        generateWindows('building3-windows', 6, 14);
+        generateWindows('building4-windows', 5, 13);
+        generateWindows('building5-windows', 4, 11);
+        generateWindows('building6-windows', 5, 12);
+        generateWindows('building7-windows', 4, 10);
+        
+        // JavaScript code for the cascading effect
+        const jsCode = [
+            "function initFuturisticCity() {",
+            "  const buildings = [];",
+            "  const holographs = [];",
+            "  return { buildings, holographs };",
+            "}",
+            "",
+            "class HolographicDisplay {",
+            "  constructor(x, y, content) {",
+            "    this.x = x;",
+            "    this.y = y;",
+            "    this.content = content;",
+            "    this.opacity = 0.9;",
+            "  }",
+            "  render() {",
+            "    // Render holographic content",
+            "    return this.content;",
+            "  }",
+            "}",
+            "",
+            "const vehicles = [];",
+            "for (let i = 0; i < 15; i++) {",
+            "  vehicles.push({",
+            "    id: `v-${i}`,",
+            "    position: { x: 0, y: 0 },",
+            "    speed: Math.random() * 5 + 2,",
+            "    trail: { binary: [], length: 100 }",
+            "  });",
+            "}",
+            "",
+            "function updateCity() {",
+            "  requestAnimationFrame(updateCity);",
+            "  vehicles.forEach(v => {",
+            "    v.position.x += v.speed;",
+            "    if (v.position.x > window.innerWidth) {",
+            "      v.position.x = -50;",
+            "      v.trail.binary = [];",
+            "    }",
+            "    // Generate binary trail",
+            "    if (Math.random() > 0.7) {",
+            "      v.trail.binary.push(Math.round(Math.random()));",
+            "    }",
+            "  });",
+            "}",
+            "",
+            "class StarTechnology {",
+            "  constructor() {",
+            "    this.innovations = [];",
+            "    this.year = 2150;",
+            "  }",
+            "  ",
+            "  createHologram(data) {",
+            "    return new HolographicDisplay(0, 0, data);",
+            "  }",
+            "  ",
+            "  launchVehicle() {",
+            "    const vehicle = {",
+            "      id: `st-${Date.now()}`,",
+            "      type: 'quantum',",
+            "      speed: 500 // km/h",
+            "    };",
+            "    return vehicle;",
+            "  }",
+            "}",
+            "",
+            "// Advanced city systems",
+            "class QuantumNetwork {",
+            "  constructor() {",
+            "    this.nodes = [];",
+            "    this.bandwidth = '100 PB/s';",
+            "  }",
+            "  ",
+            "  connect(device) {",
+            "    this.nodes.push(device);",
+            "    return true;",
+            "  }",
+            "}",
+            "",
+            "// Binary data streams",
+            "const dataStream = [",
+            "  '01001010',",
+            "  '11010101',",
+            "  '00110011'",
+            "];",
+            "",
+            "// Neural interface protocols",
+            "class NeuralInterface {",
+            "  constructor(user) {",
+            "    this.user = user;",
+            "    this.connected = false;",
+            "    this.bandwidth = '10 TB/s';",
+            "  }",
+            "  ",
+            "  connect() {",
+            "    this.connected = true;",
+            "    return 'Neural link established';",
+            "  }",
+            "  ",
+            "  transmit(data) {",
+            "    if (!this.connected) return false;",
+            "    return `Data transmitted: ${data}`;",
+            "  }",
+            "}",
+            "",
+            "// Holographic rendering engine",
+            "class HoloEngine {",
+            "  constructor() {",
+            "    this.resolution = '16K';",
+            "    this.refreshRate = '240Hz';",
+            "    this.colorSpace = 'Quantum RGB';",
+            "  }",
+            "  ",
+            "  render(scene) {",
+            "    return `Rendering ${scene} in ${this.resolution}`;",
+            "  }",
+            "}"
+        ];
+        
+        const codeContainer = document.getElementById('code-container');
+        
+        // Add code rain to the main skyscraper with enhanced effect
+        for (let i = 0; i < 30; i++) {
+            const codeElement = document.createElement('div');
+            codeElement.className = 'code-rain';
+            codeElement.style.left = `${Math.random() * 100}%`;
+            codeElement.style.top = `${Math.random() * 100}%`;
+            codeElement.style.animationDelay = `${Math.random() * 15}s`;
+            codeElement.style.animationDuration = `${10 + Math.random() * 10}s`;
+            
+            const randomCodeLine = jsCode[Math.floor(Math.random() * jsCode.length)];
+            codeElement.textContent = randomCodeLine;
+            
+            // Random color variations for code
+            const hue = 140 + Math.random() * 40; // Green to cyan
+            codeElement.style.color = `hsl(${hue}, 100%, 60%)`;
+            codeElement.style.textShadow = `0 0 8px hsl(${hue}, 100%, 60%), 0 0 12px hsl(${hue}, 100%, 40%)`;
+            
+            codeContainer.appendChild(codeElement);
+        }
+        
+        // Create flying vehicles with binary trails
+        const vehiclesContainer = document.getElementById('vehicles-container');
+        
+        function createVehicle() {
+            const vehicle = document.createElement('div');
+            vehicle.className = 'flying-vehicle';
+            
+            // Random position
+            const top = Math.random() * 60 + 10;
+            const left = Math.random() * -50;
+            
+            vehicle.style.top = `${top}%`;
+            vehicle.style.left = `${left}%`;
+            
+            // Random vehicle type (3 different designs)
+            const vehicleType = Math.floor(Math.random() * 3);
+            let vehicleSvg;
+            
+            if (vehicleType === 0) {
+                // Sleek flying car
+                vehicleSvg = `
+                    <svg width="40" height="20" viewBox="0 0 40 20">
+                        <ellipse cx="20" cy="10" rx="20" ry="6" fill="url(#vehicleGradient${vehicleType})" />
+                        <ellipse cx="30" cy="8" rx="5" ry="3" fill="rgba(0, 200, 255, 0.7)" />
+                        <circle cx="10" cy="10" r="2" fill="rgba(0, 255, 255, 0.9)" />
+                        <defs>
+                            <linearGradient id="vehicleGradient${vehicleType}" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#00ffff" />
+                                <stop offset="100%" stop-color="#0088ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                `;
+            } else if (vehicleType === 1) {
+                // Drone-like vehicle
+                vehicleSvg = `
+                    <svg width="30" height="15" viewBox="0 0 30 15">
+                        <rect x="10" y="5" width="10" height="5" rx="2" fill="url(#vehicleGradient${vehicleType})" />
+                        <circle cx="5" cy="7.5" r="3" fill="rgba(255, 100, 255, 0.7)" />
+                        <circle cx="25" cy="7.5" r="3" fill="rgba(255, 100, 255, 0.7)" />
+                        <rect x="12" y="3" width="6" height="1" fill="rgba(255, 200, 255, 0.9)" />
+                        <defs>
+                            <linearGradient id="vehicleGradient${vehicleType}" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#ff00ff" />
+                                <stop offset="100%" stop-color="#aa00ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                `;
+            } else {
+                // Futuristic shuttle
+                vehicleSvg = `
+                    <svg width="45" height="20" viewBox="0 0 45 20">
+                        <path d="M5,10 L15,5 L35,5 L40,10 L35,15 L15,15 L5,10 Z" fill="url(#vehicleGradient${vehicleType})" />
+                        <circle cx="38" cy="10" r="2" fill="rgba(255, 200, 0, 0.8)" />
+                        <rect x="15" y="7" width="15" height="6" rx="1" fill="rgba(255, 150, 0, 0.5)" />
+                        <defs>
+                            <linearGradient id="vehicleGradient${vehicleType}" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#ffcc00" />
+                                <stop offset="100%" stop-color="#ff6600" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                `;
+            }
+            
+            vehicle.innerHTML = vehicleSvg;
+            vehiclesContainer.appendChild(vehicle);
+            
+            // Animate vehicle
+            const speed = Math.random() * 15 + 10;
+            const animationDuration = 15000 / speed;
+            
+            vehicle.style.animation = `hover ${Math.random() * 2 + 3}s ease-in-out infinite`;
+            
+            // Create binary trail
+            let lastTrailTime = 0;
+            const trailColor = vehicleType === 0 ? '#00ffff' : 
+                              vehicleType === 1 ? '#ff00ff' : '#ffcc00';
+            
+            function moveVehicle() {
+                const currentLeft = parseFloat(vehicle.style.left);
+                if (currentLeft > 110) {
+                    vehicle.style.left = '-10%';
+                } else {
+                    vehicle.style.left = `${currentLeft + 0.2}%`;
+                    
+                    // Add binary trail occasionally
+                    const now = Date.now();
+                    if (now - lastTrailTime > 150) {
+                        const trail = document.createElement('div');
+                        trail.className = 'binary-trail';
+                        trail.style.top = `${parseFloat(vehicle.style.top) + 7}%`;
+                        trail.style.left = `${currentLeft}%`;
+                        trail.style.height = '3px';
+                        trail.style.background = `linear-gradient(to left, rgba(0, 0, 0, 0), ${trailColor})`;
+                        trail.style.boxShadow = `0 0 10px ${trailColor}`;
+                        
+                        // Add binary text
+                        const binaryCount = Math.floor(Math.random() * 3) + 1;
+                        for (let i = 0; i < binaryCount; i++) {
+                            const binaryText = document.createElement('div');
+                            binaryText.className = 'absolute text-xs';
+                            binaryText.style.color = trailColor;
+                            binaryText.style.top = `${-8 - (i * 12)}px`;
+                            binaryText.style.right = `${Math.random() * 50}px`;
+                            binaryText.style.opacity = '0.9';
+                            binaryText.style.textShadow = `0 0 5px ${trailColor}`;
+                            binaryText.textContent = Math.random() > 0.5 ? '1' : '0';
+                            trail.appendChild(binaryText);
+                        }
+                        
+                        vehiclesContainer.appendChild(trail);
+                        lastTrailTime = now;
+                        
+                        // Remove trail after animation completes
+                        setTimeout(() => {
+                            if (vehiclesContainer.contains(trail)) {
+                                vehiclesContainer.removeChild(trail);
+                            }
+                        }, 2000);
+                    }
+                }
+                
+                requestAnimationFrame(moveVehicle);
+            }
+            
+            moveVehicle();
+        }
+        
+        // Create multiple vehicles with staggered timing
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                createVehicle();
+            }, i * 600);
+        }
+        
+        // Create floating data particles
+        const particlesContainer = document.getElementById('particles-container');
+        
+        function createDataParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'data-particle';
+            
+            // Random position
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            
+            particle.style.left = `${startX}%`;
+            particle.style.top = `${startY}%`;
+            
+            // Random movement
+            const moveX = (Math.random() - 0.5) * 200;
+            const moveY = (Math.random() - 0.5) * 200;
+            
+            particle.style.setProperty('--moveX', `${moveX}px`);
+            particle.style.setProperty('--moveY', `${moveY}px`);
+            
+            // Random duration
+            const duration = Math.random() * 10 + 5;
+            particle.style.setProperty('--duration', `${duration}s`);
+            
+            // Random color
+            const hue = Math.random() * 60 + 180; // Cyan to blue
+            particle.style.backgroundColor = `hsla(${hue}, 100%, 70%, 0.8)`;
+            particle.style.boxShadow = `0 0 5px hsla(${hue}, 100%, 70%, 0.8)`;
+            
+            particlesContainer.appendChild(particle);
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (particlesContainer.contains(particle)) {
+                    particlesContainer.removeChild(particle);
+                }
+            }, duration * 1000);
+        }
+        
+        // Create data particles periodically
+        setInterval(() => {
+            createDataParticle();
+        }, 200);
+        
+        // Create energy pulses
+        const energyPulsesContainer = document.getElementById('energy-pulses');
+        
+        function createEnergyPulse() {
+            const pulse = document.createElement('div');
+            pulse.className = 'energy-pulse';
+            
+            // Random position
+            const top = Math.random() * 80 + 10;
+            pulse.style.top = `${top}%`;
+            pulse.style.left = '0';
+            
+            // Random color
+            const hue = Math.random() * 60 + 270; // Purple to pink
+            pulse.style.background = `linear-gradient(to right, rgba(0, 0, 0, 0), hsla(${hue}, 100%, 70%, 0.8), rgba(0, 0, 0, 0))`;
+            pulse.style.boxShadow = `0 0 10px hsla(${hue}, 100%, 70%, 0.5)`;
+            
+            // Random height
+            pulse.style.height = `${Math.random() * 2 + 1}px`;
+            
+            energyPulsesContainer.appendChild(pulse);
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (energyPulsesContainer.contains(pulse)) {
+                    energyPulsesContainer.removeChild(pulse);
+                }
+            }, 3000);
+        }
+        
+        // Create energy pulses periodically
+        setInterval(() => {
+            createEnergyPulse();
+        }, 1500);
+        
+        // Add interactive effect to neon sign
+        const neonSign = document.getElementById('neon-sign');
+        neonSign.addEventListener('click', function() {
+            // Create a ripple effect
+            const ripple = document.createElement('div');
+            ripple.className = 'absolute rounded-full bg-pink-500/30';
+            ripple.style.width = '10px';
+            ripple.style.height = '10px';
+            ripple.style.top = '50%';
+            ripple.style.left = '50%';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.animation = 'ripple 1s linear forwards';
+            ripple.style.boxShadow = '0 0 20px rgba(255, 0, 222, 0.7)';
+            
+            // Add ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    0% { width: 10px; height: 10px; opacity: 1; }
+                    100% { width: 300px; height: 300px; opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            neonSign.appendChild(ripple);
+            
+            // Remove ripple after animation
+            setTimeout(() => {
+                if (neonSign.contains(ripple)) {
+                    neonSign.removeChild(ripple);
+                }
+            }, 1000);
+            
+            // Create additional code rain
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const codeElement = document.createElement('div');
+                    codeElement.className = 'code-rain';
+                    codeElement.style.left = `${Math.random() * 100}%`;
+                    codeElement.style.top = `${Math.random() * 100}%`;
+                    codeElement.style.animationDuration = `${5 + Math.random() * 5}s`;
+                    
+                    const randomCodeLine = jsCode[Math.floor(Math.random() * jsCode.length)];
+                    codeElement.textContent = randomCodeLine;
+                    
+                    // Random color variations for code
+                    const hue = 140 + Math.random() * 40; // Green to cyan
+                    codeElement.style.color = `hsl(${hue}, 100%, 60%)`;
+                    codeElement.style.textShadow = `0 0 8px hsl(${hue}, 100%, 60%), 0 0 12px hsl(${hue}, 100%, 40%)`;
+                    
+                    codeContainer.appendChild(codeElement);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        if (codeContainer.contains(codeElement)) {
+                            codeContainer.removeChild(codeElement);
+                        }
+                    }, 10000);
+                }, i * 100);
+            }
+            
+            // Create energy pulse wave
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createEnergyPulse();
+                }, i * 200);
+            }
+            
+            // Create burst of data particles
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createDataParticle();
+                }, i * 50);
+            }
+        });
+        
+        // Periodically update some windows to simulate city life
+        setInterval(() => {
+            document.querySelectorAll('.window').forEach(window => {
+                if (Math.random() > 0.95) {
+                    const isCurrentlyLit = window.style.backgroundColor.includes('255, 255, 255');
+                    
+                    if (isCurrentlyLit) {
+                        // Turn off
+                        window.style.backgroundColor = 'rgba(0, 100, 255, 0.2)';
+                        window.style.boxShadow = 'none';
+                    } else {
+                        // Turn on
+                        window.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+                        window.style.boxShadow = '0 0 5px rgba(255, 255, 255, 0.5)';
+                    }
+                }
+            });
+        }, 800);
+        
+        // Add subtle color shift to buildings periodically
+        const buildings = document.querySelectorAll('.building');
+        setInterval(() => {
+            buildings.forEach(building => {
+                if (Math.random() > 0.8) {
+                    const hueShift = Math.random() * 20 - 10;
+                    building.style.filter = `hue-rotate(${hueShift}deg) brightness(${Math.random() * 0.2 + 0.9})`;
+                    
+                    setTimeout(() => {
+                        building.style.filter = '';
+                    }, 2000);
+                }
+            });
+        }, 3000);
+        
+        // Create initial data particles
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                createDataParticle();
+            }, i * 100);
+        }
+        
+        // Create initial energy pulses
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                createEnergyPulse();
+            }, i * 500);
+        }
+        
+        // Animate data flow on buildings
+        const dataFlows = document.querySelectorAll('.data-flow');
+        dataFlows.forEach((flow, index) => {
+            flow.style.animationDelay = `${index * 0.5}s`;
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86bb4954714135',t:'MTc3ODIyNTEzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
