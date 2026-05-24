@@ -1204,1617 +1204,970 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">   
        <a href="<!doctype html>
-<html lang="en" class="h-full">
+<html lang="tr">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Ogtal Core System</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/_sdk/element_sdk.js"></script>
+  <title>Digital Octal Core System</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
   <style>
-    body {
-      box-sizing: border-box;
-    }
-    
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Orbitron', monospace;
-      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%);
-      color: #00ff88;
-      overflow-x: hidden;
-    }
-    
-    .circuit-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    .glow-text {
-      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
-    }
-    
-    .cyber-border {
-      border: 2px solid;
-      border-image: linear-gradient(135deg, #00ff88, #00d4ff, #7b2ff7) 1;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .cyber-border::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
-      animation: scan 4s linear infinite;
-    }
-    
-    @keyframes scan {
-      0% { transform: translateY(-100%) translateX(-100%); }
-      100% { transform: translateY(100%) translateX(100%); }
-    }
-    
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 5px currentColor, 0 0 10px currentColor; }
-      50% { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor, 0 0 40px currentColor; }
-    }
-    
-    .pulse-btn {
-      animation: pulse-glow 2s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    .float-anim {
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    .input-cyber {
-      background: rgba(10, 14, 39, 0.8);
-      border: 1px solid #00ff88;
-      color: #00ff88;
-      transition: all 0.3s ease;
-    }
-    
-    .input-cyber:focus {
-      outline: none;
-      border-color: #00d4ff;
-      box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-    }
-    
-    .result-box {
-      background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(123, 47, 247, 0.05));
-      border-left: 4px solid #00ff88;
-    }
-    
-    .step-item {
-      background: rgba(0, 212, 255, 0.05);
-      border-left: 3px solid #00d4ff;
-      transition: all 0.3s ease;
-    }
-    
-    .step-item:hover {
-      background: rgba(0, 212, 255, 0.1);
-      transform: translateX(5px);
-    }
-    
-    .module-card {
-      background: linear-gradient(135deg, rgba(10, 14, 39, 0.9), rgba(26, 31, 58, 0.9));
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    
-    .module-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-    }
-    
-    .module-card.active {
-      border-color: #00ff88;
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-    }
-    
-    .symbol-decoration {
-      font-size: 1.5rem;
-      opacity: 0.3;
-      display: inline-block;
-      margin: 0 8px;
-    }
-    
-    @keyframes rotate-symbol {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .rotating-symbol {
-      animation: rotate-symbol 10s linear infinite;
-    }
+    * { font-family: 'Space Mono', monospace; }
+    .led-on { background: #00ff41; box-shadow: 0 0 8px #00ff41, 0 0 16px #00ff41; animation: pulse 1.5s infinite; }
+    .led-off { background: #1a2e1a; }
+    .led { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #333; transition: all 0.3s; }
+    .tab-active { border-bottom: 3px solid #00ff41; color: #00ff41; }
+    .step-box { border-left: 3px solid #00ff41; padding-left: 12px; margin: 8px 0; }
+    .badge { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    @keyframes dataflow { 0%{stroke-dashoffset:20} 100%{stroke-dashoffset:0} }
+    .trace-anim { stroke-dasharray: 5 3; animation: dataflow 1s linear infinite; }
+    .core-active { fill: #22c55e; filter: drop-shadow(0 0 4px #22c55e); }
+    .core-idle { fill: #7c3aed; filter: drop-shadow(0 0 3px #7c3aed); }
+    .vrm-active { fill: #f97316; animation: pulse 2s infinite; }
+    .chip-body { fill: #1a1a2e; stroke: #4ade80; stroke-width: 1; }
+    .pin { fill: #d4af37; }
+    .pcb-bg { fill: #0d3320; }
+    .copper-trace { stroke: #cd7f32; stroke-width: 1.5; fill: none; }
+    .power-trace { stroke: #ef4444; stroke-width: 2.5; fill: none; }
+    .gnd-trace { stroke: #3b82f6; stroke-width: 2; fill: none; }
+    .signal-trace { stroke: #00ff41; stroke-width: 1; fill: none; stroke-dasharray: 4 2; animation: dataflow 0.8s linear infinite; }
+    .cap-body { fill: #1e3a5f; stroke: #60a5fa; }
+    .heatsink-fin { fill: #374151; stroke: #6b7280; stroke-width: 0.5; }
+    .scroll-panel { max-height: calc(80 * min(var(--vh, 1vh), 1vh)); overflow-y: auto; }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
  </head>
- <body class="h-full">
-  <div class="circuit-bg">
-   <svg width="100%" height="100%"><defs>
-     <pattern id="circuit" x="0" y="0" width="100" height="100" patternunits="userSpaceOnUse">
-      <path d="M 10 10 L 90 10 M 50 10 L 50 90 M 10 50 L 90 50" stroke="#00ff88" stroke-width="1" fill="none" />
-      <circle cx="10" cy="10" r="3" fill="#00ff88" />
-      <circle cx="90" cy="10" r="3" fill="#00d4ff" />
-      <circle cx="50" cy="50" r="3" fill="#7b2ff7" />
-     </pattern>
-    </defs> <rect width="100%" height="100%" fill="url(#circuit)" />
-   </svg>
-  </div>
-  <div class="main-wrapper relative z-10 w-full h-full overflow-auto">
-   <div class="min-h-full px-4 py-8"><!-- Header -->
-    <header class="text-center mb-12 float-anim">
-     <div class="mb-4"><span class="symbol-decoration rotating-symbol">⍟</span> <span class="symbol-decoration">⌘</span> <span class="symbol-decoration rotating-symbol">⍣</span> <span class="symbol-decoration">⎕</span> <span class="symbol-decoration rotating-symbol">⏣</span>
+ <body data-template-id="__page-root" class="min-h-screen text-green-300">
+  <header class="border-b border-green-900 p-4">
+   <h1 data-template-id="main-title" class="canva-text text-center font-bold"></h1>
+   <p data-template-id="subtitle" class="canva-text text-center mt-1 opacity-70"></p>
+  </header>
+  <main class="max-w-7xl mx-auto p-4">
+   <nav class="flex gap-1 overflow-x-auto border-b border-green-900 mb-4" id="tab-nav"><button class="tab-btn tab-active px-3 py-2 text-xs whitespace-nowrap" data-tab="octal">Octal</button> <button class="tab-btn px-3 py-2 text-xs whitespace-nowrap" data-tab="quadratic">Quadratic</button> <button class="tab-btn px-3 py-2 text-xs whitespace-nowrap" data-tab="linear">Linear</button> <button class="tab-btn px-3 py-2 text-xs whitespace-nowrap" data-tab="percent">Percent</button> <button class="tab-btn px-3 py-2 text-xs whitespace-nowrap" data-tab="factorial">Factorial</button> <button class="tab-btn px-3 py-2 text-xs whitespace-nowrap" data-tab="circuit">Circuit</button> <button class="tab-btn px-3 py-2 text-xs whitespace-nowrap" data-tab="cpu">CPU 8-Core</button> <button class="tab-btn px-3 py-2 text-xs whitespace-nowrap" data-tab="motherboard">Motherboard</button> <button class="tab-btn px-3 py-2 text-xs whitespace-nowrap" data-tab="computer">Z80 Computer</button>
+   </nav>
+   <div class="grid lg:grid-cols-3 gap-4">
+    <div class="lg:col-span-2 scroll-panel"><!-- Octal -->
+     <div id="panel-octal" class="panel"><label data-template-id="octal-label" class="canva-text block mb-1"></label> <input id="octal-input" type="number" class="w-full bg-gray-900 border border-green-800 rounded px-3 py-2 text-green-200 mb-2" placeholder="Decimal sayı girin"> <button onclick="solveOctal()" class="bg-green-800 hover:bg-green-700 text-green-100 px-4 py-2 rounded text-sm">Hesapla</button>
+      <div id="octal-result" class="mt-4"></div>
+     </div><!-- Quadratic -->
+     <div id="panel-quadratic" class="panel hidden"><label data-template-id="quad-label" class="canva-text block mb-1"></label>
+      <div class="flex gap-2 mb-2"><input id="qa" type="number" class="w-1/3 bg-gray-900 border border-green-800 rounded px-2 py-2 text-green-200" placeholder="a"> <input id="qb" type="number" class="w-1/3 bg-gray-900 border border-green-800 rounded px-2 py-2 text-green-200" placeholder="b"> <input id="qc" type="number" class="w-1/3 bg-gray-900 border border-green-800 rounded px-2 py-2 text-green-200" placeholder="c">
+      </div><button onclick="solveQuadratic()" class="bg-green-800 hover:bg-green-700 text-green-100 px-4 py-2 rounded text-sm">Çöz</button>
+      <div id="quad-result" class="mt-4"></div>
+     </div><!-- Linear -->
+     <div id="panel-linear" class="panel hidden"><label data-template-id="linear-label" class="canva-text block mb-1"></label>
+      <div class="flex gap-2 mb-2"><input id="la" type="number" class="w-1/2 bg-gray-900 border border-green-800 rounded px-2 py-2 text-green-200" placeholder="a (ax+b=0)"> <input id="lb" type="number" class="w-1/2 bg-gray-900 border border-green-800 rounded px-2 py-2 text-green-200" placeholder="b">
+      </div><button onclick="solveLinear()" class="bg-green-800 hover:bg-green-700 text-green-100 px-4 py-2 rounded text-sm">Çöz</button>
+      <div id="linear-result" class="mt-4"></div>
+     </div><!-- Percent -->
+     <div id="panel-percent" class="panel hidden"><label data-template-id="percent-label" class="canva-text block mb-1"></label>
+      <div class="flex gap-2 mb-2"><input id="pval" type="number" class="w-1/2 bg-gray-900 border border-green-800 rounded px-2 py-2 text-green-200" placeholder="Değer"> <input id="ppct" type="number" class="w-1/2 bg-gray-900 border border-green-800 rounded px-2 py-2 text-green-200" placeholder="Yüzde %">
+      </div><button onclick="solvePercent()" class="bg-green-800 hover:bg-green-700 text-green-100 px-4 py-2 rounded text-sm">Hesapla</button>
+      <div id="percent-result" class="mt-4"></div>
+     </div><!-- Factorial -->
+     <div id="panel-factorial" class="panel hidden"><label data-template-id="fact-label" class="canva-text block mb-1"></label> <input id="fact-input" type="number" min="0" max="20" class="w-full bg-gray-900 border border-green-800 rounded px-3 py-2 text-green-200 mb-2" placeholder="n (0-20)"> <button onclick="solveFactorial()" class="bg-green-800 hover:bg-green-700 text-green-100 px-4 py-2 rounded text-sm">Hesapla</button>
+      <div id="factorial-result" class="mt-4"></div>
+     </div><!-- Circuit Schematic -->
+     <div id="panel-circuit" class="panel hidden">
+      <h3 data-template-id="circuit-title" class="canva-text font-bold mb-3"></h3>
+      <svg viewbox="0 0 800 520" class="w-full border border-green-800 rounded bg-gray-950"><!-- Power Supply --> <rect x="10" y="10" width="120" height="60" rx="4" fill="#1a1a2e" stroke="#ef4444" stroke-width="1.5" /> <text x="70" y="30" fill="#ef4444" font-size="9" text-anchor="middle">
+        +5V DC PSU
+       </text> <rect x="30" y="38" width="80" height="24" rx="2" fill="#0f0f1a" stroke="#666" /> <line x1="40" y1="50" x2="100" y2="50" stroke="#ef4444" stroke-width="2" /> <text x="70" y="60" fill="#ff6b6b" font-size="7" text-anchor="middle">
+        VCC = +5.00V
+       </text> <!-- VCC Rail --> <line x1="130" y1="40" x2="780" y2="40" class="power-trace" /> <text x="140" y="35" fill="#ef4444" font-size="7">
+        VCC (+5V)
+       </text> <!-- GND Rail --> <line x1="130" y1="500" x2="780" y2="500" class="gnd-trace" /> <text x="140" y="495" fill="#3b82f6" font-size="7">
+        GND (0V)
+       </text> <!-- 74HC04N IC Packages --> <g id="ic1" transform="translate(160,80)">
+        <rect width="100" height="70" rx="3" class="chip-body" />
+        <circle cx="12" cy="10" r="4" fill="#3b82f6" opacity="0.8">
+         <animate attributename="opacity" values="0.4;1;0.4" dur="2s" repeatcount="indefinite" />
+        </circle>
+        <text x="50" y="20" fill="#00ff41" font-size="7" text-anchor="middle">
+         74HC04N
+        </text>
+        <text x="50" y="32" fill="#ef4444" font-size="6" text-anchor="middle">
+         Texas Instruments
+        </text>
+        <text x="50" y="42" fill="#888" font-size="5" text-anchor="middle">
+         Lot: L4827 | 2425
+        </text>
+        <text x="50" y="52" fill="#888" font-size="5" text-anchor="middle">
+         MYS | DIP-14
+        </text> <!-- NOT gate symbol -->
+        <polygon points="20,56 35,62 20,68" fill="none" stroke="#00ff41" stroke-width="0.8" />
+        <circle cx="37" cy="62" r="2" fill="none" stroke="#00ff41" stroke-width="0.8" /> <!-- Pins left -->
+        <rect x="-6" y="12" width="8" height="3" class="pin" />
+        <text x="-10" y="16" fill="#aaa" font-size="4">
+         1
+        </text>
+        <rect x="-6" y="22" width="8" height="3" class="pin" />
+        <rect x="-6" y="32" width="8" height="3" class="pin" />
+        <rect x="-6" y="42" width="8" height="3" class="pin" />
+        <rect x="-6" y="52" width="8" height="3" class="pin" />
+        <rect x="-6" y="62" width="8" height="3" class="pin" /> <!-- Pins right -->
+        <rect x="98" y="12" width="8" height="3" class="pin" />
+        <text x="110" y="16" fill="#aaa" font-size="4">
+         14
+        </text>
+        <rect x="98" y="22" width="8" height="3" class="pin" />
+        <rect x="98" y="32" width="8" height="3" class="pin" />
+        <rect x="98" y="42" width="8" height="3" class="pin" />
+        <rect x="98" y="52" width="8" height="3" class="pin" />
+        <rect x="98" y="62" width="8" height="3" class="pin" />
+       </g> <g id="ic2" transform="translate(160,180)">
+        <rect width="100" height="70" rx="3" class="chip-body" />
+        <circle cx="12" cy="10" r="4" fill="#3b82f6" opacity="0.8">
+         <animate attributename="opacity" values="0.4;1;0.4" dur="2s" repeatcount="indefinite" />
+        </circle>
+        <text x="50" y="20" fill="#00ff41" font-size="7" text-anchor="middle">
+         74HC04N
+        </text>
+        <text x="50" y="32" fill="#ef4444" font-size="6" text-anchor="middle">
+         Texas Instruments
+        </text>
+        <text x="50" y="42" fill="#888" font-size="5" text-anchor="middle">
+         Lot: L7193 | 2438
+        </text>
+        <text x="50" y="52" fill="#888" font-size="5" text-anchor="middle">
+         MYS | DIP-14
+        </text>
+        <polygon points="20,56 35,62 20,68" fill="none" stroke="#00ff41" stroke-width="0.8" />
+        <circle cx="37" cy="62" r="2" fill="none" stroke="#00ff41" stroke-width="0.8" />
+        <rect x="-6" y="12" width="8" height="3" class="pin" />
+        <rect x="-6" y="22" width="8" height="3" class="pin" />
+        <rect x="-6" y="32" width="8" height="3" class="pin" />
+        <rect x="-6" y="42" width="8" height="3" class="pin" />
+        <rect x="-6" y="52" width="8" height="3" class="pin" />
+        <rect x="-6" y="62" width="8" height="3" class="pin" />
+        <rect x="98" y="12" width="8" height="3" class="pin" />
+        <rect x="98" y="22" width="8" height="3" class="pin" />
+        <rect x="98" y="32" width="8" height="3" class="pin" />
+        <rect x="98" y="42" width="8" height="3" class="pin" />
+        <rect x="98" y="52" width="8" height="3" class="pin" />
+        <rect x="98" y="62" width="8" height="3" class="pin" />
+       </g> <!-- Resistors R1-R8 --> <g transform="translate(350,80)">
+        <text x="0" y="-5" fill="#f59e0b" font-size="7">
+         R1-R8: 220Ω 1/4W ±5% Carbon Film
+        </text> <!-- R1 -->
+        <rect x="0" y="5" width="50" height="14" rx="7" fill="#d4a574" stroke="#8b6914" />
+        <rect x="8" y="5" width="5" height="14" fill="#ef4444" />
+        <rect x="15" y="5" width="5" height="14" fill="#ef4444" />
+        <rect x="22" y="5" width="5" height="14" fill="#854d0e" />
+        <rect x="36" y="5" width="5" height="14" fill="#d4af37" />
+        <text x="25" y="30" fill="#ccc" font-size="6" text-anchor="middle">
+         R1 220Ω
+        </text>
+        <line x1="-10" y1="12" x2="0" y2="12" stroke="#cd7f32" stroke-width="1.5" />
+        <line x1="50" y1="12" x2="60" y2="12" stroke="#cd7f32" stroke-width="1.5" /> <!-- R2 -->
+        <rect x="0" y="40" width="50" height="14" rx="7" fill="#d4a574" stroke="#8b6914" />
+        <rect x="8" y="40" width="5" height="14" fill="#ef4444" />
+        <rect x="15" y="40" width="5" height="14" fill="#ef4444" />
+        <rect x="22" y="40" width="5" height="14" fill="#854d0e" />
+        <rect x="36" y="40" width="5" height="14" fill="#d4af37" />
+        <text x="25" y="65" fill="#ccc" font-size="6" text-anchor="middle">
+         R2 220Ω
+        </text> <!-- R3-R8 abbreviated -->
+        <rect x="0" y="75" width="50" height="14" rx="7" fill="#d4a574" stroke="#8b6914" />
+        <rect x="8" y="75" width="5" height="14" fill="#ef4444" />
+        <rect x="15" y="75" width="5" height="14" fill="#ef4444" />
+        <rect x="22" y="75" width="5" height="14" fill="#854d0e" />
+        <text x="25" y="100" fill="#ccc" font-size="6" text-anchor="middle">
+         R3 220Ω
+        </text>
+        <rect x="0" y="110" width="50" height="14" rx="7" fill="#d4a574" stroke="#8b6914" />
+        <rect x="8" y="110" width="5" height="14" fill="#ef4444" />
+        <rect x="15" y="110" width="5" height="14" fill="#ef4444" />
+        <rect x="22" y="110" width="5" height="14" fill="#854d0e" />
+        <text x="25" y="135" fill="#ccc" font-size="6" text-anchor="middle">
+         R4 220Ω
+        </text>
+        <rect x="0" y="145" width="50" height="14" rx="7" fill="#d4a574" stroke="#8b6914" />
+        <rect x="8" y="145" width="5" height="14" fill="#ef4444" />
+        <rect x="15" y="145" width="5" height="14" fill="#ef4444" />
+        <rect x="22" y="145" width="5" height="14" fill="#854d0e" />
+        <text x="25" y="170" fill="#ccc" font-size="6" text-anchor="middle">
+         R5 220Ω
+        </text>
+        <rect x="0" y="180" width="50" height="14" rx="7" fill="#d4a574" stroke="#8b6914" />
+        <rect x="8" y="180" width="5" height="14" fill="#ef4444" />
+        <rect x="15" y="180" width="5" height="14" fill="#ef4444" />
+        <rect x="22" y="180" width="5" height="14" fill="#854d0e" />
+        <text x="25" y="205" fill="#ccc" font-size="6" text-anchor="middle">
+         R6 220Ω
+        </text>
+        <rect x="0" y="215" width="50" height="14" rx="7" fill="#d4a574" stroke="#8b6914" />
+        <rect x="8" y="215" width="5" height="14" fill="#ef4444" />
+        <rect x="15" y="215" width="5" height="14" fill="#ef4444" />
+        <rect x="22" y="215" width="5" height="14" fill="#854d0e" />
+        <text x="25" y="240" fill="#ccc" font-size="6" text-anchor="middle">
+         R7 220Ω
+        </text>
+        <rect x="0" y="250" width="50" height="14" rx="7" fill="#d4a574" stroke="#8b6914" />
+        <rect x="8" y="250" width="5" height="14" fill="#ef4444" />
+        <rect x="15" y="250" width="5" height="14" fill="#ef4444" />
+        <rect x="22" y="250" width="5" height="14" fill="#854d0e" />
+        <text x="25" y="275" fill="#ccc" font-size="6" text-anchor="middle">
+         R8 220Ω
+        </text>
+       </g> <!-- LEDs D1-D8 --> <g transform="translate(500,80)">
+        <text x="30" y="-5" fill="#22c55e" font-size="7">
+         D1-D8: 5mm GREEN Vf=2.1V If=20mA
+        </text>
+        <g class="led-svg" transform="translate(20,5)">
+         <ellipse cx="15" cy="10" rx="10" ry="12" fill="#166534" stroke="#22c55e" stroke-width="1" />
+         <ellipse cx="15" cy="8" rx="6" ry="7" fill="#22c55e" opacity="0.6">
+          <animate attributename="opacity" values="0.3;0.8;0.3" dur="1.5s" repeatcount="indefinite" />
+         </ellipse>
+         <line x1="12" y1="22" x2="12" y2="32" stroke="#aaa" stroke-width="1" />
+         <text x="8" y="38" fill="#aaa" font-size="4">
+          A
+         </text>
+         <line x1="18" y1="22" x2="18" y2="32" stroke="#aaa" stroke-width="1" />
+         <text x="19" y="38" fill="#aaa" font-size="4">
+          K
+         </text>
+         <text x="15" y="46" fill="#6b7280" font-size="5" text-anchor="middle">
+          D1
+         </text>
+        </g>
+        <g class="led-svg" transform="translate(55,5)">
+         <ellipse cx="15" cy="10" rx="10" ry="12" fill="#166534" stroke="#22c55e" stroke-width="1" />
+         <ellipse cx="15" cy="8" rx="6" ry="7" fill="#22c55e" opacity="0.6">
+          <animate attributename="opacity" values="0.3;0.8;0.3" dur="1.5s" repeatcount="indefinite" begin="0.2s" />
+         </ellipse>
+         <line x1="12" y1="22" x2="12" y2="32" stroke="#aaa" stroke-width="1" />
+         <line x1="18" y1="22" x2="18" y2="32" stroke="#aaa" stroke-width="1" />
+         <text x="15" y="46" fill="#6b7280" font-size="5" text-anchor="middle">
+          D2
+         </text>
+        </g>
+        <g class="led-svg" transform="translate(90,5)">
+         <ellipse cx="15" cy="10" rx="10" ry="12" fill="#166534" stroke="#22c55e" stroke-width="1" />
+         <ellipse cx="15" cy="8" rx="6" ry="7" fill="#22c55e" opacity="0.4" />
+         <text x="15" y="46" fill="#6b7280" font-size="5" text-anchor="middle">
+          D3
+         </text>
+        </g>
+        <g class="led-svg" transform="translate(125,5)">
+         <ellipse cx="15" cy="10" rx="10" ry="12" fill="#166534" stroke="#22c55e" stroke-width="1" />
+         <ellipse cx="15" cy="8" rx="6" ry="7" fill="#22c55e" opacity="0.4" />
+         <text x="15" y="46" fill="#6b7280" font-size="5" text-anchor="middle">
+          D4
+         </text>
+        </g>
+        <g class="led-svg" transform="translate(20,65)">
+         <ellipse cx="15" cy="10" rx="10" ry="12" fill="#166534" stroke="#22c55e" stroke-width="1" />
+         <ellipse cx="15" cy="8" rx="6" ry="7" fill="#22c55e" opacity="0.4" />
+         <text x="15" y="46" fill="#6b7280" font-size="5" text-anchor="middle">
+          D5
+         </text>
+        </g>
+        <g class="led-svg" transform="translate(55,65)">
+         <ellipse cx="15" cy="10" rx="10" ry="12" fill="#166534" stroke="#22c55e" stroke-width="1" />
+         <ellipse cx="15" cy="8" rx="6" ry="7" fill="#22c55e" opacity="0.4" />
+         <text x="15" y="46" fill="#6b7280" font-size="5" text-anchor="middle">
+          D6
+         </text>
+        </g>
+        <g class="led-svg" transform="translate(90,65)">
+         <ellipse cx="15" cy="10" rx="10" ry="12" fill="#166534" stroke="#22c55e" stroke-width="1" />
+         <ellipse cx="15" cy="8" rx="6" ry="7" fill="#22c55e" opacity="0.4" />
+         <text x="15" y="46" fill="#6b7280" font-size="5" text-anchor="middle">
+          D7
+         </text>
+        </g>
+        <g class="led-svg" transform="translate(125,65)">
+         <ellipse cx="15" cy="10" rx="10" ry="12" fill="#166534" stroke="#22c55e" stroke-width="1" />
+         <ellipse cx="15" cy="8" rx="6" ry="7" fill="#22c55e" opacity="0.4" />
+         <text x="15" y="46" fill="#6b7280" font-size="5" text-anchor="middle">
+          D8
+         </text>
+        </g>
+       </g> <!-- Signal traces --> <path d="M268,115 Q310,115 350,92" class="signal-trace" /> <path d="M268,125 Q310,130 350,127" class="signal-trace" /> <path d="M268,135 Q310,145 350,157" class="signal-trace" /> <path d="M268,145 Q310,160 350,192" class="signal-trace" /> <path d="M410,92 Q440,92 500,92" class="copper-trace" /> <path d="M410,127 Q440,127 500,127" class="copper-trace" /> <path d="M410,157 Q440,157 500,152" class="copper-trace" /> <path d="M410,192 Q440,192 500,152" class="copper-trace" /> <!-- Component Legend --> <rect x="10" y="360" width="780" height="130" rx="4" fill="#0a0f0a" stroke="#333" /> <text x="20" y="380" fill="#f59e0b" font-size="9" font-weight="bold">
+        COMPONENT LEGEND
+       </text> <text x="20" y="395" fill="#ccc" font-size="7">
+        IC1-IC2: 74HC04N Hex Inverter (TI) | VCC=Pin14, GND=Pin7 | 6× NOT Gates
+       </text> <text x="20" y="410" fill="#ccc" font-size="7">
+        R1-R8: 220Ω ±5% 1/4W Carbon Film | Color: Red-Red-Brown-Gold | I=20mA @ 4.4V drop
+       </text> <text x="20" y="425" fill="#ccc" font-size="7">
+        D1-D8: 5mm Green LED | Vf=2.1V If=20mA | ANODE→R→VCC, CATHODE→GND
+       </text> <text x="20" y="440" fill="#ccc" font-size="7">
+        Power: +5V DC regulated | Total I = 8×20mA = 160mA | P_total = 0.8W
+       </text> <text x="20" y="455" fill="#ccc" font-size="7">
+        V_resistor = 5V - 2.1V = 2.9V | R = 2.9V / 20mA = 145Ω (220Ω used for safety)
+       </text> <!-- Connection Status --> <rect x="550" y="370" width="230" height="110" rx="3" fill="#0f1a0f" stroke="#22c55e" stroke-width="0.5" /> <text x="560" y="385" fill="#22c55e" font-size="7" font-weight="bold">
+        CONNECTION STATUS
+       </text> <circle cx="565" cy="397" r="3" fill="#22c55e">
+        <animate attributename="opacity" values="1;0.3;1" dur="1s" repeatcount="indefinite" />
+       </circle> <text x="575" y="400" fill="#aaa" font-size="6">
+        VCC Rail: ACTIVE 5.00V
+       </text> <circle cx="565" cy="412" r="3" fill="#22c55e" /> <text x="575" y="415" fill="#aaa" font-size="6">
+        GND Rail: CONNECTED
+       </text> <circle cx="565" cy="427" r="3" fill="#22c55e" /> <text x="575" y="430" fill="#aaa" font-size="6">
+        IC1 Logic: OPERATIONAL
+       </text> <circle cx="565" cy="442" r="3" fill="#22c55e" /> <text x="575" y="445" fill="#aaa" font-size="6">
+        IC2 Logic: OPERATIONAL
+       </text> <circle cx="565" cy="457" r="3" fill="#f59e0b" /> <text x="575" y="460" fill="#aaa" font-size="6">
+        LED Bank: 2/8 ACTIVE
+       </text> <circle cx="565" cy="472" r="3" fill="#22c55e" /> <text x="575" y="475" fill="#aaa" font-size="6">
+        Total Power: 0.32W / 0.8W max
+       </text>
+      </svg>
+     </div><!-- CPU 8-Core -->
+     <div id="panel-cpu" class="panel hidden">
+      <h3 data-template-id="cpu-title" class="canva-text font-bold mb-3"></h3>
+      <div class="mb-3 flex flex-wrap gap-2"><span class="text-xs text-green-400">Core Control:</span> <button class="core-toggle text-xs bg-gray-800 border border-green-700 px-2 py-1 rounded" data-core="0">C0</button> <button class="core-toggle text-xs bg-gray-800 border border-green-700 px-2 py-1 rounded" data-core="1">C1</button> <button class="core-toggle text-xs bg-gray-800 border border-green-700 px-2 py-1 rounded" data-core="2">C2</button> <button class="core-toggle text-xs bg-gray-800 border border-green-700 px-2 py-1 rounded" data-core="3">C3</button> <button class="core-toggle text-xs bg-gray-800 border border-green-700 px-2 py-1 rounded" data-core="4">C4</button> <button class="core-toggle text-xs bg-gray-800 border border-green-700 px-2 py-1 rounded" data-core="5">C5</button> <button class="core-toggle text-xs bg-gray-800 border border-green-700 px-2 py-1 rounded" data-core="6">C6</button> <button class="core-toggle text-xs bg-gray-800 border border-green-700 px-2 py-1 rounded" data-core="7">C7</button>
+      </div>
+      <svg id="cpu-svg" viewbox="0 0 700 500" class="w-full border border-green-800 rounded bg-gray-950"><!-- Processor Die --> <rect x="50" y="30" width="400" height="300" rx="6" fill="#0d1117" stroke="#4ade80" stroke-width="2" /> <text x="250" y="20" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">
+        8-CORE PROCESSOR DIE
+       </text> <!-- Cores 2x4 grid --> <g id="cores-group">
+        <rect id="core-0" x="70" y="50" width="80" height="60" rx="4" class="core-active" />
+        <text x="110" y="70" fill="#000" font-size="7" text-anchor="middle" font-weight="bold">
+         CORE 0
+        </text>
+        <text x="90" y="85" fill="#000" font-size="5">
+         ALU
+        </text>
+        <text x="120" y="85" fill="#000" font-size="5">
+         FPU
+        </text>
+        <text x="110" y="100" fill="#000" font-size="5">
+         L1: 64KB
+        </text>
+        <rect id="core-1" x="160" y="50" width="80" height="60" rx="4" class="core-active" />
+        <text x="200" y="70" fill="#000" font-size="7" text-anchor="middle" font-weight="bold">
+         CORE 1
+        </text>
+        <text x="180" y="85" fill="#000" font-size="5">
+         ALU
+        </text>
+        <text x="210" y="85" fill="#000" font-size="5">
+         FPU
+        </text>
+        <text x="200" y="100" fill="#000" font-size="5">
+         L1: 64KB
+        </text>
+        <rect id="core-2" x="250" y="50" width="80" height="60" rx="4" class="core-active" />
+        <text x="290" y="70" fill="#000" font-size="7" text-anchor="middle" font-weight="bold">
+         CORE 2
+        </text>
+        <text x="270" y="85" fill="#000" font-size="5">
+         ALU
+        </text>
+        <text x="300" y="85" fill="#000" font-size="5">
+         FPU
+        </text>
+        <text x="290" y="100" fill="#000" font-size="5">
+         L1: 64KB
+        </text>
+        <rect id="core-3" x="340" y="50" width="80" height="60" rx="4" class="core-active" />
+        <text x="380" y="70" fill="#000" font-size="7" text-anchor="middle" font-weight="bold">
+         CORE 3
+        </text>
+        <text x="360" y="85" fill="#000" font-size="5">
+         ALU
+        </text>
+        <text x="390" y="85" fill="#000" font-size="5">
+         FPU
+        </text>
+        <text x="380" y="100" fill="#000" font-size="5">
+         L1: 64KB
+        </text>
+        <rect id="core-4" x="70" y="125" width="80" height="60" rx="4" class="core-active" />
+        <text x="110" y="145" fill="#000" font-size="7" text-anchor="middle" font-weight="bold">
+         CORE 4
+        </text>
+        <text x="90" y="160" fill="#000" font-size="5">
+         ALU
+        </text>
+        <text x="120" y="160" fill="#000" font-size="5">
+         FPU
+        </text>
+        <text x="110" y="175" fill="#000" font-size="5">
+         L1: 64KB
+        </text>
+        <rect id="core-5" x="160" y="125" width="80" height="60" rx="4" class="core-active" />
+        <text x="200" y="145" fill="#000" font-size="7" text-anchor="middle" font-weight="bold">
+         CORE 5
+        </text>
+        <text x="180" y="160" fill="#000" font-size="5">
+         ALU
+        </text>
+        <text x="210" y="160" fill="#000" font-size="5">
+         FPU
+        </text>
+        <text x="200" y="175" fill="#000" font-size="5">
+         L1: 64KB
+        </text>
+        <rect id="core-6" x="250" y="125" width="80" height="60" rx="4" class="core-idle" />
+        <text x="290" y="145" fill="#fff" font-size="7" text-anchor="middle" font-weight="bold">
+         CORE 6
+        </text>
+        <text x="270" y="160" fill="#ddd" font-size="5">
+         ALU
+        </text>
+        <text x="300" y="160" fill="#ddd" font-size="5">
+         FPU
+        </text>
+        <text x="290" y="175" fill="#ddd" font-size="5">
+         L1: 64KB
+        </text>
+        <rect id="core-7" x="340" y="125" width="80" height="60" rx="4" class="core-idle" />
+        <text x="380" y="145" fill="#fff" font-size="7" text-anchor="middle" font-weight="bold">
+         CORE 7
+        </text>
+        <text x="360" y="160" fill="#ddd" font-size="5">
+         ALU
+        </text>
+        <text x="390" y="160" fill="#ddd" font-size="5">
+         FPU
+        </text>
+        <text x="380" y="175" fill="#ddd" font-size="5">
+         L1: 64KB
+        </text>
+       </g> <!-- Shared Cache --> <rect x="70" y="200" width="350" height="30" rx="3" fill="#1e3a5f" stroke="#60a5fa" /> <text x="245" y="220" fill="#93c5fd" font-size="8" text-anchor="middle">
+        L2 Shared Cache: 2MB (256KB/core)
+       </text> <rect x="70" y="240" width="350" height="30" rx="3" fill="#1e1b4b" stroke="#818cf8" /> <text x="245" y="260" fill="#a5b4fc" font-size="8" text-anchor="middle">
+        L3 Unified Cache: 16MB
+       </text> <!-- Memory Controller --> <rect x="70" y="280" width="170" height="35" rx="3" fill="#1a1a2e" stroke="#f59e0b" /> <text x="155" y="298" fill="#fbbf24" font-size="7" text-anchor="middle">
+        Memory Controller
+       </text> <text x="155" y="310" fill="#fbbf24" font-size="6" text-anchor="middle">
+        DDR5-5600 Dual Channel
+       </text> <!-- PCIe Controller --> <rect x="250" y="280" width="170" height="35" rx="3" fill="#1a1a2e" stroke="#a855f7" /> <text x="335" y="298" fill="#c084fc" font-size="7" text-anchor="middle">
+        PCIe 5.0 Controller
+       </text> <text x="335" y="310" fill="#c084fc" font-size="6" text-anchor="middle">
+        28 Lanes
+       </text> <!-- I/O Die --> <rect x="480" y="50" width="190" height="120" rx="4" fill="#1a1a2e" stroke="#f97316" /> <text x="575" y="70" fill="#fb923c" font-size="8" text-anchor="middle" font-weight="bold">
+        I/O DIE
+       </text> <text x="575" y="90" fill="#fdba74" font-size="6" text-anchor="middle">
+        Infinity Fabric
+       </text> <text x="575" y="105" fill="#fdba74" font-size="6" text-anchor="middle">
+        USB 4.0 Controller
+       </text> <text x="575" y="120" fill="#fdba74" font-size="6" text-anchor="middle">
+        32×64-bit Register File
+       </text> <text x="575" y="135" fill="#fdba74" font-size="6" text-anchor="middle">
+        Branch Predictor
+       </text> <!-- Performance Metrics --> <rect x="480" y="190" width="190" height="140" rx="4" fill="#0f1a0f" stroke="#22c55e" /> <text x="575" y="210" fill="#00ff41" font-size="8" text-anchor="middle" font-weight="bold">
+        PERFORMANCE METRICS
+       </text> <text id="metric-cores" x="490" y="230" fill="#4ade80" font-size="7">
+        Active Cores: 6/8
+       </text> <text x="490" y="248" fill="#4ade80" font-size="7">
+        Threads: 12/16
+       </text> <text x="490" y="266" fill="#4ade80" font-size="7">
+        Clock: 4.7 GHz (Boost)
+       </text> <text x="490" y="284" fill="#f59e0b" font-size="7">
+        Power: 95W TDP
+       </text> <text x="490" y="302" fill="#ef4444" font-size="7">
+        Temp: 72°C
+       </text> <text id="metric-binary" x="490" y="320" fill="#93c5fd" font-size="7">
+        Binary: 11111100
+       </text> <!-- Data flow animations --> <path d="M420,160 Q450,160 480,120" class="signal-trace" /> <path d="M420,250 Q460,300 480,280" class="signal-trace" />
+      </svg>
+     </div><!-- Motherboard -->
+     <div id="panel-motherboard" class="panel hidden">
+      <h3 data-template-id="mb-title" class="canva-text font-bold mb-3"></h3>
+      <svg viewbox="0 0 800 650" class="w-full border border-green-800 rounded"><!-- PCB Background --> <rect width="800" height="650" rx="6" class="pcb-bg" /> <!-- PCB Traces pattern --> <g opacity="0.3">
+        <line x1="50" y1="0" x2="50" y2="650" stroke="#cd7f32" stroke-width="0.5" />
+        <line x1="100" y1="0" x2="100" y2="650" stroke="#cd7f32" stroke-width="0.5" />
+        <line x1="150" y1="0" x2="150" y2="650" stroke="#cd7f32" stroke-width="0.5" />
+        <line x1="200" y1="0" x2="200" y2="650" stroke="#cd7f32" stroke-width="0.5" />
+        <line x1="0" y1="100" x2="800" y2="100" stroke="#cd7f32" stroke-width="0.5" />
+        <line x1="0" y1="200" x2="800" y2="200" stroke="#cd7f32" stroke-width="0.5" />
+        <line x1="0" y1="300" x2="800" y2="300" stroke="#cd7f32" stroke-width="0.5" />
+        <line x1="0" y1="400" x2="800" y2="400" stroke="#cd7f32" stroke-width="0.5" />
+        <line x1="0" y1="500" x2="800" y2="500" stroke="#cd7f32" stroke-width="0.5" />
+       </g> <!-- CPU Socket LGA 1718 --> <rect x="250" y="80" width="180" height="180" rx="4" fill="#111" stroke="#d4af37" stroke-width="2" /> <rect x="260" y="90" width="160" height="160" fill="#1a1a1a" stroke="#888" /> <text x="340" y="120" fill="#d4af37" font-size="9" text-anchor="middle" font-weight="bold">
+        LGA 1718
+       </text> <text x="340" y="140" fill="#4ade80" font-size="7" text-anchor="middle">
+        AM5 Socket
+       </text> <text x="340" y="160" fill="#aaa" font-size="6" text-anchor="middle">
+        8-Core Processor
+       </text> <!-- Corner brackets --> <path d="M252,82 L252,72 L262,72" fill="none" stroke="#888" stroke-width="2" /> <path d="M428,82 L428,72 L418,72" fill="none" stroke="#888" stroke-width="2" /> <path d="M252,258 L252,268 L262,268" fill="none" stroke="#888" stroke-width="2" /> <path d="M428,258 L428,268 L418,268" fill="none" stroke="#888" stroke-width="2" /> <!-- VRM 16+2 Phase --> <rect x="180" y="30" width="280" height="35" rx="3" fill="#1a1a2e" stroke="#f97316" /> <text x="320" y="50" fill="#fb923c" font-size="8" text-anchor="middle" font-weight="bold">
+        16+2 Phase VRM (DrMOS)
+       </text> <text x="320" y="62" fill="#fdba74" font-size="6" text-anchor="middle">
+        90A/phase | ISL99390
+       </text> <!-- VRM capacitors --> <g transform="translate(180,20)">
+        <rect x="0" y="0" width="6" height="10" rx="1" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5" />
+        <rect x="10" y="0" width="6" height="10" rx="1" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5" />
+        <rect x="20" y="0" width="6" height="10" rx="1" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5" />
+        <rect x="30" y="0" width="6" height="10" rx="1" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5" />
+        <rect x="40" y="0" width="6" height="10" rx="1" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5" />
+        <rect x="50" y="0" width="6" height="10" rx="1" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5" />
+        <rect x="60" y="0" width="6" height="10" rx="1" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5" />
+        <rect x="70" y="0" width="6" height="10" rx="1" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5" />
+       </g> <!-- DDR5 RAM Slots --> <rect x="500" y="60" width="20" height="220" rx="2" fill="#111" stroke="#3b82f6" stroke-width="1.5" /> <rect x="525" y="60" width="20" height="220" rx="2" fill="#111" stroke="#3b82f6" stroke-width="1.5" /> <rect x="550" y="60" width="20" height="220" rx="2" fill="#111" stroke="#3b82f6" stroke-width="1.5" /> <rect x="575" y="60" width="20" height="220" rx="2" fill="#111" stroke="#3b82f6" stroke-width="1.5" /> <text x="545" y="55" fill="#93c5fd" font-size="7" text-anchor="middle">
+        DDR5-5600 DIMM 1-4
+       </text> <!-- RAM activity LEDs --> <circle cx="510" y="55" r="2" fill="#3b82f6">
+        <animate attributename="opacity" values="1;0.2;1" dur="0.5s" repeatcount="indefinite" />
+       </circle> <circle cx="535" y="55" r="2" fill="#3b82f6">
+        <animate attributename="opacity" values="1;0.2;1" dur="0.5s" repeatcount="indefinite" begin="0.1s" />
+       </circle> <!-- PCIe Slots --> <rect x="80" y="320" width="350" height="20" rx="2" fill="#111" stroke="#a855f7" stroke-width="1.5" /> <text x="255" y="335" fill="#c084fc" font-size="7" text-anchor="middle">
+        PCIe 5.0 x16 (GPU)
+       </text> <rect x="80" y="360" width="180" height="14" rx="2" fill="#111" stroke="#7c3aed" /> <text x="170" y="371" fill="#a78bfa" font-size="6" text-anchor="middle">
+        PCIe 4.0 x4
+       </text> <rect x="80" y="390" width="100" height="12" rx="2" fill="#111" stroke="#6d28d9" /> <text x="130" y="399" fill="#8b5cf6" font-size="5" text-anchor="middle">
+        PCIe 3.0 x1
+       </text> <!-- M.2 NVMe --> <rect x="500" y="320" width="80" height="20" rx="2" fill="#222" stroke="#ec4899" /> <text x="540" y="334" fill="#f472b6" font-size="6" text-anchor="middle">
+        M.2 PCIe 5.0 x4
+       </text> <rect x="500" y="355" width="80" height="20" rx="2" fill="#222" stroke="#db2777" /> <text x="540" y="369" fill="#f472b6" font-size="6" text-anchor="middle">
+        M.2 PCIe 4.0 x4
+       </text> <!-- Chipset X670E --> <rect x="450" y="420" width="100" height="80" rx="4" fill="#1a1a2e" stroke="#f59e0b" stroke-width="1.5" /> <text x="500" y="445" fill="#fbbf24" font-size="8" text-anchor="middle" font-weight="bold">
+        X670E
+       </text> <text x="500" y="460" fill="#fde68a" font-size="6" text-anchor="middle">
+        Chipset
+       </text> <!-- Heatsink fins --> <g transform="translate(450,500)">
+        <rect x="0" y="0" width="100" height="20" rx="2" fill="#374151" stroke="#6b7280" />
+        <line x1="5" y1="0" x2="5" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="13" y1="0" x2="13" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="21" y1="0" x2="21" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="29" y1="0" x2="29" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="37" y1="0" x2="37" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="45" y1="0" x2="45" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="53" y1="0" x2="53" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="61" y1="0" x2="61" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="69" y1="0" x2="69" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="77" y1="0" x2="77" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="85" y1="0" x2="85" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+        <line x1="93" y1="0" x2="93" y2="20" stroke="#9ca3af" stroke-width="0.5" />
+       </g> <!-- I/O Panel --> <rect x="620" y="20" width="160" height="200" rx="4" fill="#111" stroke="#666" /> <text x="700" y="38" fill="#aaa" font-size="7" text-anchor="middle" font-weight="bold">
+        I/O PANEL
+       </text> <rect x="630" y="45" width="30" height="12" rx="1" fill="#3b82f6" /><text x="665" y="54" fill="#93c5fd" font-size="5">
+        USB 4.0
+       </text> <rect x="630" y="62" width="30" height="12" rx="1" fill="#3b82f6" /><text x="665" y="71" fill="#93c5fd" font-size="5">
+        USB 4.0
+       </text> <rect x="630" y="79" width="20" height="10" rx="1" fill="#22c55e" /><text x="655" y="87" fill="#86efac" font-size="5">
+        LAN 2.5G
+       </text> <rect x="630" y="94" width="25" height="10" rx="1" fill="#f59e0b" /><text x="660" y="102" fill="#fde68a" font-size="5">
+        HDMI 2.1
+       </text> <rect x="630" y="109" width="25" height="10" rx="1" fill="#ef4444" /><text x="660" y="117" fill="#fca5a5" font-size="5">
+        DisplayPort
+       </text> <rect x="630" y="124" width="20" height="20" rx="1" fill="#22c55e" /><text x="655" y="137" fill="#86efac" font-size="5">
+        Audio
+       </text> <rect x="630" y="149" width="12" height="25" rx="1" fill="#d4af37" /><text x="648" y="165" fill="#fde68a" font-size="5">
+        WiFi 6E
+       </text> <rect x="630" y="179" width="12" height="25" rx="1" fill="#d4af37" /><text x="648" y="195" fill="#fde68a" font-size="5">
+        BT 5.3
+       </text> <!-- Status LEDs --> <g transform="translate(620,420)">
+        <text x="0" y="0" fill="#aaa" font-size="7" font-weight="bold">
+         DIAGNOSTIC
+        </text>
+        <circle cx="8" cy="12" r="3" fill="#ef4444">
+         <animate attributename="opacity" values="1;0.2;1" dur="1s" repeatcount="indefinite" />
+        </circle>
+        <text x="16" y="15" fill="#fca5a5" font-size="5">
+         CPU
+        </text>
+        <circle cx="8" cy="25" r="3" fill="#f59e0b" />
+        <text x="16" y="28" fill="#fde68a" font-size="5">
+         DRAM
+        </text>
+        <circle cx="8" cy="38" r="3" fill="#22c55e" />
+        <text x="16" y="41" fill="#86efac" font-size="5">
+         VGA
+        </text>
+        <circle cx="8" cy="51" r="3" fill="#22c55e" />
+        <text x="16" y="54" fill="#86efac" font-size="5">
+         BOOT
+        </text>
+        <circle cx="8" cy="64" r="3" fill="#22c55e" />
+        <text x="16" y="67" fill="#86efac" font-size="5">
+         PWR
+        </text>
+        <rect x="60" y="5" width="30" height="18" rx="2" fill="#111" stroke="#f59e0b" />
+        <text x="75" y="17" fill="#fbbf24" font-size="8" text-anchor="middle">
+         A2
+        </text>
+       </g> <!-- Fan Headers --> <g transform="translate(80,550)">
+        <rect x="0" y="0" width="24" height="10" rx="1" fill="#333" stroke="#aaa" stroke-width="0.5" />
+        <text x="12" y="22" fill="#aaa" font-size="5" text-anchor="middle">
+         CPU_FAN
+        </text>
+        <rect x="40" y="0" width="24" height="10" rx="1" fill="#333" stroke="#aaa" stroke-width="0.5" />
+        <text x="52" y="22" fill="#aaa" font-size="5" text-anchor="middle">
+         SYS1
+        </text>
+        <rect x="80" y="0" width="24" height="10" rx="1" fill="#333" stroke="#aaa" stroke-width="0.5" />
+        <text x="92" y="22" fill="#aaa" font-size="5" text-anchor="middle">
+         SYS2
+        </text>
+        <rect x="120" y="0" width="24" height="10" rx="1" fill="#333" stroke="#aaa" stroke-width="0.5" />
+        <text x="132" y="22" fill="#aaa" font-size="5" text-anchor="middle">
+         SYS3
+        </text>
+       </g> <!-- CMOS & BIOS --> <circle cx="700" cy="560" r="12" fill="#c0c0c0" stroke="#888" /> <text x="700" y="563" fill="#333" font-size="5" text-anchor="middle">
+        CR2032
+       </text> <rect x="640" y="580" width="40" height="20" rx="2" fill="#1a1a2e" stroke="#d4af37" /> <text x="660" y="594" fill="#fbbf24" font-size="5" text-anchor="middle">
+        BIOS
+       </text> <!-- Power traces --> <path d="M250,170 Q200,170 180,60" class="power-trace" opacity="0.6" /> <path d="M430,170 Q480,170 500,170" class="signal-trace" />
+      </svg>
+     </div><!-- Z80 Computer -->
+     <div id="panel-computer" class="panel hidden">
+      <h3 data-template-id="computer-title" class="canva-text font-bold mb-3"></h3>
+      <svg viewbox="0 0 800 580" class="w-full border border-green-800 rounded bg-gray-950"><!-- CPU Block --> <rect x="20" y="20" width="280" height="250" rx="4" fill="#0d1117" stroke="#4ade80" stroke-width="1.5" /> <text x="160" y="40" fill="#00ff41" font-size="9" text-anchor="middle" font-weight="bold">
+        Z80 CPU @ 4.77 MHz
+       </text> <!-- ALU --> <rect x="30" y="50" width="120" height="80" rx="3" fill="#1a2e1a" stroke="#22c55e" /> <text x="90" y="67" fill="#4ade80" font-size="7" text-anchor="middle" font-weight="bold">
+        ALU (8-bit)
+       </text> <text x="50" y="82" fill="#86efac" font-size="5">
+        ADD SUB
+       </text> <text x="50" y="92" fill="#86efac" font-size="5">
+        INC DEC
+       </text> <text x="50" y="102" fill="#86efac" font-size="5">
+        AND OR
+       </text> <text x="50" y="112" fill="#86efac" font-size="5">
+        XOR NOT
+       </text> <text x="110" y="82" fill="#fbbf24" font-size="5">
+        → ADD
+       </text> <!-- Flags --> <rect x="30" y="135" width="120" height="25" rx="2" fill="#111" stroke="#f59e0b" /> <text x="90" y="148" fill="#fbbf24" font-size="6" text-anchor="middle">
+        Z C S P O
+       </text> <circle cx="52" cy="155" r="3" fill="#22c55e" /><circle cx="67" cy="155" r="3" fill="#1a2e1a" stroke="#666" /><circle cx="82" cy="155" r="3" fill="#1a2e1a" stroke="#666" /><circle cx="97" cy="155" r="3" fill="#22c55e" /><circle cx="112" cy="155" r="3" fill="#1a2e1a" stroke="#666" /> <!-- Registers --> <rect x="160" y="50" width="130" height="130" rx="3" fill="#1a1a2e" stroke="#818cf8" /> <text x="225" y="67" fill="#a5b4fc" font-size="7" text-anchor="middle" font-weight="bold">
+        REGISTERS
+       </text> <text x="170" y="82" fill="#c4b5fd" font-size="6">
+        A: 0xD3
+       </text> <text x="170" y="95" fill="#c4b5fd" font-size="6">
+        B: 0x45
+       </text> <text x="170" y="108" fill="#c4b5fd" font-size="6">
+        C: 0x1F
+       </text> <text x="170" y="121" fill="#c4b5fd" font-size="6">
+        D: 0x00
+       </text> <text x="170" y="134" fill="#fbbf24" font-size="6">
+        PC: 0x0100
+       </text> <text x="170" y="147" fill="#fbbf24" font-size="6">
+        SP: 0x00FF
+       </text> <text x="170" y="160" fill="#fbbf24" font-size="6">
+        IR: 0x3E
+       </text> <text x="170" y="173" fill="#fbbf24" font-size="6">
+        MAR: 0x05
+       </text> <!-- Control Unit --> <rect x="30" y="170" width="260" height="90" rx="3" fill="#1a1a2e" stroke="#f97316" /> <text x="160" y="188" fill="#fb923c" font-size="7" text-anchor="middle" font-weight="bold">
+        CONTROL UNIT
+       </text> <text x="40" y="205" fill="#fdba74" font-size="6">
+        Opcode: LD A, 0xD3
+       </text> <text x="40" y="220" fill="#fdba74" font-size="6">
+        T-State: T2 (Execute)
+       </text> <text x="40" y="235" fill="#fdba74" font-size="6">
+        Clock: 4.77 MHz
+       </text> <!-- Clock animation --> <rect x="200" y="195" width="80" height="50" rx="2" fill="#0a0f0a" stroke="#666" /> <path d="M210,220 L220,220 L220,210 L230,210 L230,220 L240,220 L240,210 L250,210 L250,220 L260,220 L260,210 L270,210 L270,220" fill="none" stroke="#00ff41" stroke-width="1">
+        <animate attributename="d" values="M210,220 L220,220 L220,210 L230,210 L230,220 L240,220 L240,210 L250,210 L250,220 L260,220 L260,210 L270,210 L270,220;M210,210 L220,210 L220,220 L230,220 L230,210 L240,210 L240,220 L250,220 L250,210 L260,210 L260,220 L270,220 L270,210" dur="0.5s" repeatcount="indefinite" />
+       </path> <!-- RAM --> <rect x="350" y="20" width="200" height="120" rx="4" fill="#0d1117" stroke="#3b82f6" stroke-width="1.5" /> <text x="450" y="40" fill="#93c5fd" font-size="8" text-anchor="middle" font-weight="bold">
+        256-Byte SRAM
+       </text> <!-- Memory grid --> <g transform="translate(360,48)">
+        <rect x="0" y="0" width="180" height="80" fill="#0a0f1a" stroke="#1e40af" rx="2" />
+        <text x="5" y="12" fill="#60a5fa" font-size="4">
+         0x00: 3E 0x01: D3
+        </text>
+        <text x="5" y="22" fill="#60a5fa" font-size="4">
+         0x02: 00 0x03: 76
+        </text>
+        <text x="5" y="32" fill="#60a5fa" font-size="4">
+         0x04: FF 0x05: A5
+        </text>
+        <rect x="72" y="25" width="28" height="10" fill="#22c55e" opacity="0.3" rx="1">
+         <animate attributename="opacity" values="0.1;0.4;0.1" dur="1s" repeatcount="indefinite" />
+        </rect>
+        <text x="5" y="42" fill="#60a5fa" font-size="4">
+         0x06: 4C 0x07: 2F
+        </text>
+        <text x="5" y="52" fill="#444" font-size="4">
+         ... (248 more bytes)
+        </text>
+        <text x="5" y="65" fill="#fbbf24" font-size="4">
+         Active: 0x05 → 0xA5
+        </text>
+       </g> <!-- ROM --> <rect x="350" y="160" width="200" height="100" rx="4" fill="#0d1117" stroke="#a855f7" stroke-width="1.5" /> <text x="450" y="180" fill="#c084fc" font-size="8" text-anchor="middle" font-weight="bold">
+        2KB EPROM (ROM)
+       </text> <text x="360" y="198" fill="#a78bfa" font-size="6">
+        0x0000-0x00FF: BIOS
+       </text> <text x="360" y="212" fill="#a78bfa" font-size="6">
+        0x0100-0x03FF: Boot Loader
+       </text> <text x="360" y="226" fill="#a78bfa" font-size="6">
+        0x0400-0x07FF: System Tables
+       </text> <text x="360" y="240" fill="#6b7280" font-size="5">
+        27C16 EPROM | UV Erasable
+       </text> <!-- I/O Ports --> <rect x="600" y="20" width="180" height="250" rx="4" fill="#0d1117" stroke="#f59e0b" stroke-width="1.5" /> <text x="690" y="40" fill="#fbbf24" font-size="8" text-anchor="middle" font-weight="bold">
+        I/O PORTS
+       </text> <!-- GPIO --> <rect x="610" y="48" width="160" height="40" rx="2" fill="#111" stroke="#22c55e" /> <text x="690" y="62" fill="#4ade80" font-size="6" text-anchor="middle">
+        GPIO (16-pin 8255 PPI)
+       </text> <g transform="translate(615,68)">
+        <circle cx="5" cy="5" r="2" fill="#22c55e" />
+        <circle cx="15" cy="5" r="2" fill="#22c55e" />
+        <circle cx="25" cy="5" r="2" fill="#1a2e1a" stroke="#444" />
+        <circle cx="35" cy="5" r="2" fill="#22c55e" />
+        <circle cx="45" cy="5" r="2" fill="#1a2e1a" stroke="#444" />
+        <circle cx="55" cy="5" r="2" fill="#1a2e1a" stroke="#444" />
+        <circle cx="65" cy="5" r="2" fill="#22c55e" />
+        <circle cx="75" cy="5" r="2" fill="#1a2e1a" stroke="#444" />
+        <text x="0" y="16" fill="#6b7280" font-size="4">
+         P0 P1 P2 P3 P4 P5 P6 P7
+        </text>
+       </g> <!-- UART --> <rect x="610" y="95" width="160" height="35" rx="2" fill="#111" stroke="#ef4444" /> <text x="690" y="110" fill="#fca5a5" font-size="6" text-anchor="middle">
+        UART 8250 Serial
+       </text> <text x="620" y="124" fill="#f87171" font-size="5">
+        TX→ RX← 9600 baud
+       </text> <path d="M700,115 L740,115" stroke="#ef4444" stroke-width="1" class="trace-anim" /> <!-- SPI --> <rect x="610" y="137" width="160" height="35" rx="2" fill="#111" stroke="#06b6d4" /> <text x="690" y="152" fill="#67e8f9" font-size="6" text-anchor="middle">
+        SPI Bus (4-wire)
+       </text> <text x="620" y="166" fill="#22d3ee" font-size="5">
+        MOSI MISO SCK CS
+       </text> <!-- LED Output --> <rect x="610" y="180" width="160" height="40" rx="2" fill="#111" stroke="#22c55e" /> <text x="690" y="195" fill="#4ade80" font-size="6" text-anchor="middle">
+        8-Bit LED Output (0x80)
+       </text> <text x="620" y="210" fill="#4ade80" font-size="5">
+        74HC595 → D7-D0
+       </text> <!-- PS/2 & VGA --> <rect x="610" y="228" width="75" height="30" rx="2" fill="#111" stroke="#a855f7" /> <text x="648" y="247" fill="#c084fc" font-size="5" text-anchor="middle">
+        PS/2 KBD
+       </text> <rect x="695" y="228" width="75" height="30" rx="2" fill="#111" stroke="#3b82f6" /> <text x="732" y="247" fill="#93c5fd" font-size="5" text-anchor="middle">
+        VGA 640×480
+       </text> <!-- Buses --> <rect x="20" y="290" width="760" height="50" rx="4" fill="#0a0f0a" stroke="#333" /> <text x="400" y="305" fill="#00ff41" font-size="7" text-anchor="middle" font-weight="bold">
+        SYSTEM BUS
+       </text> <line x1="30" y1="315" x2="770" y2="315" stroke="#ef4444" stroke-width="2" /> <text x="40" y="313" fill="#ef4444" font-size="5">
+        8-bit Data Bus (D0-D7)
+       </text> <line x1="30" y1="328" x2="770" y2="328" stroke="#3b82f6" stroke-width="2" /> <text x="40" y="326" fill="#3b82f6" font-size="5">
+        16-bit Address Bus (A0-A15)
+       </text> <!-- Data flow --> <circle cx="200" cy="315" r="3" fill="#ef4444">
+        <animate attributename="cx" values="100;700" dur="2s" repeatcount="indefinite" />
+       </circle> <circle cx="500" cy="328" r="3" fill="#3b82f6">
+        <animate attributename="cx" values="700;100" dur="2.5s" repeatcount="indefinite" />
+       </circle> <!-- Power Supply --> <rect x="20" y="360" width="200" height="80" rx="4" fill="#0d1117" stroke="#ef4444" /> <text x="120" y="380" fill="#ef4444" font-size="8" text-anchor="middle" font-weight="bold">
+        POWER SUPPLY
+       </text> <text x="30" y="398" fill="#fca5a5" font-size="6">
+        LM7805: +5V Rail
+       </text> <text x="30" y="412" fill="#fca5a5" font-size="6">
+        LM7812: +12V Rail
+       </text> <text x="30" y="426" fill="#fca5a5" font-size="6">
+        C1-C4: 100μF Filter
+       </text> <!-- Clock Oscillator --> <rect x="240" y="360" width="150" height="80" rx="4" fill="#0d1117" stroke="#fbbf24" /> <text x="315" y="380" fill="#fbbf24" font-size="8" text-anchor="middle" font-weight="bold">
+        OSCILLATOR
+       </text> <text x="250" y="398" fill="#fde68a" font-size="6">
+        Crystal: 4.77 MHz
+       </text> <text x="250" y="412" fill="#fde68a" font-size="6">
+        C5-C6: 22pF Load
+       </text> <text x="250" y="426" fill="#fde68a" font-size="6">
+        74HC04 Buffer
+       </text> <!-- LED Display Bank --> <rect x="420" y="360" width="360" height="80" rx="4" fill="#0d1117" stroke="#22c55e" /> <text x="600" y="380" fill="#4ade80" font-size="8" text-anchor="middle" font-weight="bold">
+        LED OUTPUT BANK: 11010011
+       </text> <g transform="translate(440,390)">
+        <circle cx="10" cy="15" r="6" fill="#22c55e">
+         <animate attributename="opacity" values="1;0.4;1" dur="1.5s" repeatcount="indefinite" />
+        </circle>
+        <circle cx="35" cy="15" r="6" fill="#22c55e">
+         <animate attributename="opacity" values="1;0.4;1" dur="1.5s" repeatcount="indefinite" begin="0.1s" />
+        </circle>
+        <circle cx="60" cy="15" r="6" fill="#1a2e1a" stroke="#333" />
+        <circle cx="85" cy="15" r="6" fill="#22c55e">
+         <animate attributename="opacity" values="1;0.4;1" dur="1.5s" repeatcount="indefinite" begin="0.2s" />
+        </circle>
+        <circle cx="110" cy="15" r="6" fill="#1a2e1a" stroke="#333" />
+        <circle cx="135" cy="15" r="6" fill="#1a2e1a" stroke="#333" />
+        <circle cx="160" cy="15" r="6" fill="#22c55e">
+         <animate attributename="opacity" values="1;0.4;1" dur="1.5s" repeatcount="indefinite" begin="0.3s" />
+        </circle>
+        <circle cx="185" cy="15" r="6" fill="#22c55e">
+         <animate attributename="opacity" values="1;0.4;1" dur="1.5s" repeatcount="indefinite" begin="0.4s" />
+        </circle>
+        <text x="0" y="35" fill="#6b7280" font-size="5">
+         D7 D6 D5 D4 D3 D2 D1 D0
+        </text>
+       </g> <!-- Component List --> <rect x="20" y="460" width="760" height="100" rx="4" fill="#0a0f0a" stroke="#333" /> <text x="30" y="478" fill="#fbbf24" font-size="7" font-weight="bold">
+        COMPONENT LIST
+       </text> <text x="30" y="493" fill="#ccc" font-size="6">
+        IC1: Z80 CPU | IC2: 74LS245 Bus Transceiver | IC3: 6264 SRAM | IC4: 27C16 EPROM
+       </text> <text x="30" y="507" fill="#ccc" font-size="6">
+        IC5: 8255 PPI | IC6: 8250 UART | IC7: 74HC595 Shift Register | IC8: 74HC04 Inverter
+       </text> <text x="30" y="521" fill="#ccc" font-size="6">
+        R1-R8: 220Ω | R9-R12: 4.7kΩ | C1-C4: 100μF | C5-C6: 22pF | Q1-Q2: 2N2222 NPN
+       </text> <text x="30" y="535" fill="#ccc" font-size="6">
+        D1-D8: 5mm GREEN LED (Vf=2.1V) | XTAL: 4.77MHz | VR1: LM7805 | VR2: LM7812
+       </text> <text x="30" y="549" fill="#22c55e" font-size="6">
+        Control: RD, WR, MREQ, IORQ, INT, NMI | Address: A0-A15 | Data: D0-D7
+       </text>
+      </svg>
      </div>
-     <h1 id="system-title" class="text-5xl md:text-6xl font-black glow-text mb-3" style="color: #00ff88;">DIGITAL OGTAL CORE SYSTEM</h1>
-     <p id="system-subtitle" class="text-xl md:text-2xl" style="color: #00d4ff;">⎔ Advanced Mathematical Computing ⎕</p>
-     <div class="mt-4"><span class="symbol-decoration">⍜</span> <span class="symbol-decoration rotating-symbol">⍤</span> <span class="symbol-decoration">⍥</span> <span class="symbol-decoration rotating-symbol">⍨</span> <span class="symbol-decoration">⍩</span>
-     </div>
-    </header><!-- Module Selection -->
-    <div class="max-w-7xl mx-auto mb-8">
-     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4"><!-- Quadratic Module -->
-      <div class="module-card cyber-border p-4 rounded-lg" data-module="quadratic">
-       <div class="text-center">
-        <div class="text-4xl mb-2">
-         📐
-        </div>
-        <h3 class="text-sm font-bold mb-1" style="color: #00ff88;">QUADRATIC</h3>
-        <p class="text-xs opacity-70">ax² + bx + c = 0</p>
+    </div><!-- Right Panel: LED + History -->
+    <div class="space-y-4">
+     <div data-template-id="led-panel" class="canva-panel border border-green-800 rounded p-3">
+      <h3 data-template-id="led-title" class="canva-text text-sm font-bold mb-2"></h3>
+      <div class="flex justify-center gap-1 mb-2" id="led-display">
+       <div class="led led-off"></div>
+       <div class="led led-off"></div>
+       <div class="led led-off"></div>
+       <div class="led led-off"></div>
+       <div class="led led-off"></div>
+       <div class="led led-off"></div>
+       <div class="led led-off"></div>
+       <div class="led led-off"></div>
+      </div>
+      <div class="text-center text-xs opacity-60" id="binary-text">
+       00000000
+      </div>
+      <div class="mt-2 text-xs opacity-50 border-t border-green-900 pt-2">
+       <div>
+        +5V DC → 220Ω → LED → GND
        </div>
-      </div><!-- Octal Module -->
-      <div class="module-card cyber-border p-4 rounded-lg" data-module="octal">
-       <div class="text-center">
-        <div class="text-4xl mb-2">
-         🔢
-        </div>
-        <h3 class="text-sm font-bold mb-1" style="color: #00d4ff;">OCTAL</h3>
-        <p class="text-xs opacity-70">Base-8 Convert</p>
-       </div>
-      </div><!-- Linear Module -->
-      <div class="module-card cyber-border p-4 rounded-lg" data-module="linear">
-       <div class="text-center">
-        <div class="text-4xl mb-2">
-         📊
-        </div>
-        <h3 class="text-sm font-bold mb-1" style="color: #7b2ff7;">LINEAR</h3>
-        <p class="text-xs opacity-70">ax + b = 0</p>
-       </div>
-      </div><!-- Percentage Module -->
-      <div class="module-card cyber-border p-4 rounded-lg" data-module="percentage">
-       <div class="text-center">
-        <div class="text-4xl mb-2">
-         📈
-        </div>
-        <h3 class="text-sm font-bold mb-1" style="color: #ff6b9d;">PERCENTAGE</h3>
-        <p class="text-xs opacity-70">% Calculations</p>
-       </div>
-      </div><!-- Factorial Module -->
-      <div class="module-card cyber-border p-4 rounded-lg" data-module="factorial">
-       <div class="text-center">
-        <div class="text-4xl mb-2">
-         🔬
-        </div>
-        <h3 class="text-sm font-bold mb-1" style="color: #ffd700;">FACTORIAL</h3>
-        <p class="text-xs opacity-70">n!</p>
+       <div>
+        Buffer/NOT Gates | I≈20mA/LED
        </div>
       </div>
      </div>
-    </div><!-- Content Area -->
-    <div class="max-w-6xl mx-auto"><!-- Quadratic Module Content -->
-     <div id="quadratic-content" class="module-content hidden">
-      <div class="cyber-border p-6 rounded-lg mb-6" style="background: rgba(10, 14, 39, 0.9);">
-       <h2 class="text-2xl font-bold mb-4 glow-text" style="color: #00ff88;">⍟ QUADRATIC EQUATION SOLVER ⍟</h2>
-       <p class="mb-4 opacity-80">Solve ax² + bx + c = 0 with three methods: Quadratic Formula, Completing the Square, and Factoring</p>
-       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div><label class="block text-sm mb-2">Coefficient a:</label> <input type="number" id="quad-a" class="input-cyber w-full px-4 py-2 rounded" placeholder="1" step="any">
-        </div>
-        <div><label class="block text-sm mb-2">Coefficient b:</label> <input type="number" id="quad-b" class="input-cyber w-full px-4 py-2 rounded" placeholder="0" step="any">
-        </div>
-        <div><label class="block text-sm mb-2">Coefficient c:</label> <input type="number" id="quad-c" class="input-cyber w-full px-4 py-2 rounded" placeholder="0" step="any">
-        </div>
-       </div><button id="solve-quadratic" class="pulse-btn w-full py-3 rounded font-bold text-lg" style="background: #00ff88; color: #0a0e27;"> ⎔ EXECUTE CALCULATION ⎕ </button>
-      </div>
-      <div id="quadratic-results" class="hidden"><!-- Results will be inserted here -->
-      </div>
-     </div><!-- Octal Module Content -->
-     <div id="octal-content" class="module-content hidden">
-      <div class="cyber-border p-6 rounded-lg mb-6" style="background: rgba(10, 14, 39, 0.9);">
-       <h2 class="text-2xl font-bold mb-4 glow-text" style="color: #00d4ff;">⍣ OCTAL CONVERSION SYSTEM ⍣</h2>
-       <div class="mb-6"><label class="block text-sm mb-2">Decimal Number:</label> <input type="number" id="octal-input" class="input-cyber w-full px-4 py-2 rounded" placeholder="Enter decimal number" min="0">
-       </div><button id="convert-octal" class="pulse-btn w-full py-3 rounded font-bold text-lg" style="background: #00d4ff; color: #0a0e27;"> ⎔ CONVERT TO OCTAL ⎕ </button>
-      </div>
-      <div id="octal-results" class="hidden"></div>
-     </div><!-- Linear Module Content -->
-     <div id="linear-content" class="module-content hidden">
-      <div class="cyber-border p-6 rounded-lg mb-6" style="background: rgba(10, 14, 39, 0.9);">
-       <h2 class="text-2xl font-bold mb-4 glow-text" style="color: #7b2ff7;">⍤ LINEAR EQUATION SOLVER ⍤</h2>
-       <p class="mb-4 opacity-80">Solve ax + b = 0</p>
-       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <div><label class="block text-sm mb-2">Coefficient a:</label> <input type="number" id="linear-a" class="input-cyber w-full px-4 py-2 rounded" placeholder="1" step="any">
-        </div>
-        <div><label class="block text-sm mb-2">Coefficient b:</label> <input type="number" id="linear-b" class="input-cyber w-full px-4 py-2 rounded" placeholder="0" step="any">
-        </div>
-       </div><button id="solve-linear" class="pulse-btn w-full py-3 rounded font-bold text-lg" style="background: #7b2ff7; color: #fff;"> ⎔ EXECUTE CALCULATION ⎕ </button>
-      </div>
-      <div id="linear-results" class="hidden"></div>
-     </div><!-- Percentage Module Content -->
-     <div id="percentage-content" class="module-content hidden">
-      <div class="cyber-border p-6 rounded-lg mb-6" style="background: rgba(10, 14, 39, 0.9);">
-       <h2 class="text-2xl font-bold mb-4 glow-text" style="color: #ff6b9d;">⍥ PERCENTAGE CALCULATOR ⍥</h2>
-       <div class="mb-6"><label class="block text-sm mb-2">What is</label> <input type="number" id="percent-value" class="input-cyber w-full px-4 py-2 rounded mb-4" placeholder="Percentage %" step="any"> <label class="block text-sm mb-2">of</label> <input type="number" id="percent-total" class="input-cyber w-full px-4 py-2 rounded" placeholder="Total value" step="any">
-       </div><button id="calculate-percent" class="pulse-btn w-full py-3 rounded font-bold text-lg" style="background: #ff6b9d; color: #fff;"> ⎔ CALCULATE ⎕ </button>
-      </div>
-      <div id="percent-results" class="hidden"></div>
-     </div><!-- Factorial Module Content -->
-     <div id="factorial-content" class="module-content hidden">
-      <div class="cyber-border p-6 rounded-lg mb-6" style="background: rgba(10, 14, 39, 0.9);">
-       <h2 class="text-2xl font-bold mb-4 glow-text" style="color: #ffd700;">⍨ FACTORIAL CALCULATOR ⍨</h2>
-       <div class="mb-6"><label class="block text-sm mb-2">Enter n (0-170):</label> <input type="number" id="factorial-input" class="input-cyber w-full px-4 py-2 rounded" placeholder="Enter number" min="0" max="170">
-       </div><button id="calculate-factorial" class="pulse-btn w-full py-3 rounded font-bold text-lg" style="background: #ffd700; color: #0a0e27;"> ⎔ CALCULATE n! ⎕ </button>
-      </div>
-      <div id="factorial-results" class="hidden"></div>
+     <div data-template-id="history-panel" class="canva-panel border border-green-800 rounded p-3">
+      <h3 data-template-id="history-title" class="canva-text text-sm font-bold mb-2"></h3>
+      <div id="history-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+      <p id="history-empty" data-template-id="history-empty" class="canva-text text-xs opacity-50"></p>
+      <p id="limit-warning" class="text-red-400 text-xs hidden">Maksimum kayıt sınırına ulaşıldı (999)</p>
      </div>
-    </div><!-- Footer -->
-    <footer class="text-center mt-12 pb-8 opacity-60">
-     <div class="mb-2"><span class="symbol-decoration">⌥</span> <span class="symbol-decoration">⍜</span> <span class="symbol-decoration">⎔</span>
-     </div>
-     <p class="text-sm">⎕ Quantum Computing Protocol Established ⎕</p>
-     <p class="text-xs mt-1">Distributed Architecture • Cloud Integration • Advanced Analytics</p>
-    </footer>
+    </div>
    </div>
-  </div>
+  </main>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
   <script>
-    const defaultConfig = {
-      system_title: "DIGITAL OGTAL CORE SYSTEM",
-      subtitle: "⎔ Advanced Mathematical Computing ⎕"
+    let allRecords = [];
+    let coreStates = [1,1,1,1,1,1,0,0];
+
+    const dataHandler = {
+      onDataChanged(data) {
+        allRecords = data;
+        renderHistory();
+      }
     };
 
-    async function onConfigChange(config) {
-      const titleElement = document.getElementById('system-title');
-      const subtitleElement = document.getElementById('system-subtitle');
-      
-      if (titleElement) {
-        titleElement.textContent = config.system_title || defaultConfig.system_title;
-      }
-      if (subtitleElement) {
-        subtitleElement.textContent = config.subtitle || defaultConfig.subtitle;
-      }
-    }
+    (async () => {
+      const r = await window.dataSdk.init(dataHandler);
+      if (!r.isOk) console.error('SDK init failed');
+    })();
 
-    function mapToCapabilities(config) {
-      return {
-        recolorables: [],
-        borderables: [],
-        fontEditable: undefined,
-        fontSizeable: undefined
-      };
-    }
-
-    function mapToEditPanelValues(config) {
-      return new Map([
-        ["system_title", config.system_title || defaultConfig.system_title],
-        ["subtitle", config.subtitle || defaultConfig.subtitle]
-      ]);
-    }
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
+    function renderHistory() {
+      const list = document.getElementById('history-list');
+      const empty = document.getElementById('history-empty');
+      if (allRecords.length === 0) { list.innerHTML = ''; empty.classList.remove('hidden'); return; }
+      empty.classList.add('hidden');
+      const existing = new Map([...list.children].map(el => [el.dataset.rid, el]));
+      const sorted = [...allRecords].sort((a,b) => (b.created_at||'').localeCompare(a.created_at||''));
+      sorted.forEach(rec => {
+        if (existing.has(rec.__backendId)) { existing.delete(rec.__backendId); return; }
+        const div = document.createElement('div');
+        div.dataset.rid = rec.__backendId;
+        div.className = 'bg-gray-900 rounded p-2 text-xs border border-green-900';
+        const colors = {octal:'#0ea5e9',quadratic:'#a855f7',linear:'#f59e0b',percent:'#10b981',factorial:'#ef4444'};
+        div.innerHTML = `<span class="badge" style="background:${colors[rec.calculation_type]||'#666'};color:#000">${rec.calculation_type}</span> <span class="ml-1">${rec.input_expression}</span><div class="mt-1 text-green-400">${rec.result} | ${rec.binary_output}</div>`;
+        list.prepend(div);
       });
+      existing.forEach(el => el.remove());
     }
 
-    // Module switching
-    let currentModule = null;
+    async function saveRecord(type, input, result, binary) {
+      if (allRecords.length >= 999) { document.getElementById('limit-warning').classList.remove('hidden'); return; }
+      await window.dataSdk.create({ calculation_type: type, input_expression: input, result: result, binary_output: binary, created_at: new Date().toISOString() });
+    }
 
-    document.querySelectorAll('.module-card').forEach(card => {
-      card.addEventListener('click', function() {
-        const module = this.dataset.module;
-        
-        // Update active states
-        document.querySelectorAll('.module-card').forEach(c => c.classList.remove('active'));
-        this.classList.add('active');
-        
-        // Hide all content
-        document.querySelectorAll('.module-content').forEach(content => {
-          content.classList.add('hidden');
-        });
-        
-        // Show selected module
-        const content = document.getElementById(`${module}-content`);
-        if (content) {
-          content.classList.remove('hidden');
-          currentModule = module;
-        }
+    function updateLED(num) {
+      num = Math.max(0, Math.min(255, Math.abs(Math.round(num))));
+      const bin = num.toString(2).padStart(8, '0');
+      document.getElementById('binary-text').textContent = bin;
+      const leds = document.querySelectorAll('#led-display .led');
+      leds.forEach((led, i) => { led.className = bin[i] === '1' ? 'led led-on' : 'led led-off'; });
+      return bin;
+    }
+
+    function stepHTML(steps) {
+      return steps.map(s => `<div class="step-box"><div class="text-xs opacity-60">${s.label}</div><div class="text-sm">${s.value}</div></div>`).join('');
+    }
+
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
+        btn.classList.add('tab-active');
+        document.querySelectorAll('.panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById('panel-' + btn.dataset.tab).classList.remove('hidden');
       });
     });
 
-    // Quadratic Solver
-    document.getElementById('solve-quadratic').addEventListener('click', function() {
-      const a = parseFloat(document.getElementById('quad-a').value) || 0;
-      const b = parseFloat(document.getElementById('quad-b').value) || 0;
-      const c = parseFloat(document.getElementById('quad-c').value) || 0;
-
-      if (a === 0) {
-        showMessage('quadratic-results', 'Error: Coefficient "a" cannot be zero for a quadratic equation.', '#ff6b9d');
-        return;
-      }
-
-      const resultsDiv = document.getElementById('quadratic-results');
-      resultsDiv.classList.remove('hidden');
-
-      const discriminant = b * b - 4 * a * c;
-      
-      let html = `
-        <div class="cyber-border p-6 rounded-lg mb-6" style="background: rgba(10, 14, 39, 0.9);">
-          <h3 class="text-xl font-bold mb-4" style="color: #00ff88;">⎕ Equation: ${a}x² + ${b}x + ${c} = 0</h3>
-          
-          <div class="result-box p-4 rounded mb-4">
-            <h4 class="font-bold mb-2" style="color: #00d4ff;">Discriminant Analysis:</h4>
-            <p class="mb-2">Δ = b² - 4ac = ${b}² - 4(${a})(${c}) = ${discriminant.toFixed(4)}</p>
-      `;
-
-      if (discriminant > 0) {
-        html += `<p style="color: #00ff88;">✓ Δ > 0: Two distinct real roots</p>`;
-      } else if (discriminant === 0) {
-        html += `<p style="color: #ffd700;">✓ Δ = 0: One repeated real root</p>`;
-      } else {
-        html += `<p style="color: #ff6b9d;">✓ Δ < 0: Two complex conjugate roots</p>`;
-      }
-
-      html += `</div>`;
-
-      // Method 1: Quadratic Formula
-      html += `
-        <div class="mb-6">
-          <h4 class="text-lg font-bold mb-3" style="color: #00ff88;">⍟ Method 1: Quadratic Formula</h4>
-          <div class="space-y-2">
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 1:</span> Use formula x = (-b ± √Δ) / (2a)
-            </div>
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 2:</span> x = (${-b} ± √${discriminant.toFixed(4)}) / ${2 * a}
-            </div>
-      `;
-
-      if (discriminant >= 0) {
-        const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-        const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
-        html += `
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 3:</span> x₁ = ${x1.toFixed(4)}, x₂ = ${x2.toFixed(4)}
-            </div>
-        `;
-      } else {
-        const realPart = (-b / (2 * a)).toFixed(4);
-        const imagPart = (Math.sqrt(-discriminant) / (2 * a)).toFixed(4);
-        html += `
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 3:</span> x₁ = ${realPart} + ${imagPart}i, x₂ = ${realPart} - ${imagPart}i
-            </div>
-        `;
-      }
-
-      html += `</div></div>`;
-
-      // Method 2: Completing the Square
-      html += `
-        <div class="mb-6">
-          <h4 class="text-lg font-bold mb-3" style="color: #00d4ff;">⍣ Method 2: Completing the Square</h4>
-          <div class="space-y-2">
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #7b2ff7;">Step 1:</span> Divide by a: x² + ${(b/a).toFixed(4)}x + ${(c/a).toFixed(4)} = 0
-            </div>
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #7b2ff7;">Step 2:</span> Move constant: x² + ${(b/a).toFixed(4)}x = ${(-c/a).toFixed(4)}
-            </div>
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #7b2ff7;">Step 3:</span> Complete square: (x + ${(b/(2*a)).toFixed(4)})² = ${((b*b - 4*a*c)/(4*a*a)).toFixed(4)}
-            </div>
-      `;
-
-      if (discriminant >= 0) {
-        const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-        const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
-        html += `
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #7b2ff7;">Step 4:</span> x₁ = ${x1.toFixed(4)}, x₂ = ${x2.toFixed(4)}
-            </div>
-        `;
-      } else {
-        const realPart = (-b / (2 * a)).toFixed(4);
-        const imagPart = (Math.sqrt(-discriminant) / (2 * a)).toFixed(4);
-        html += `
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #7b2ff7;">Step 4:</span> x₁ = ${realPart} + ${imagPart}i, x₂ = ${realPart} - ${imagPart}i
-            </div>
-        `;
-      }
-
-      html += `</div></div>`;
-
-      // Method 3: Factoring (when applicable)
-      html += `
-        <div class="mb-6">
-          <h4 class="text-lg font-bold mb-3" style="color: #ff6b9d;">⍤ Method 3: Factoring</h4>
-      `;
-
-      if (discriminant >= 0 && Number.isInteger(discriminant) && Math.sqrt(discriminant) % 1 === 0) {
-        const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-        const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
-        html += `
-          <div class="space-y-2">
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #ffd700;">Step 1:</span> Factor form: ${a}(x - ${x1.toFixed(4)})(x - ${x2.toFixed(4)}) = 0
-            </div>
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #ffd700;">Step 2:</span> Solutions: x₁ = ${x1.toFixed(4)}, x₂ = ${x2.toFixed(4)}
-            </div>
-          </div>
-        `;
-      } else {
-        html += `
-          <div class="step-item p-3 rounded">
-            <p style="color: #ff6b9d;">⚠ Factoring not applicable for this equation (non-rational roots)</p>
-          </div>
-        `;
-      }
-
-      html += `</div>`;
-
-      // Verification
-      if (discriminant >= 0) {
-        const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-        const verify1 = a * x1 * x1 + b * x1 + c;
-        html += `
-          <div class="result-box p-4 rounded">
-            <h4 class="font-bold mb-2" style="color: #00ff88;">✓ Verification:</h4>
-            <p>For x₁ = ${x1.toFixed(4)}: ${a}(${x1.toFixed(4)})² + ${b}(${x1.toFixed(4)}) + ${c} = ${verify1.toFixed(6)} ≈ 0</p>
-          </div>
-        `;
-      }
-
-      html += `</div>`;
-      resultsDiv.innerHTML = html;
-    });
-
-    // Octal Converter
-    document.getElementById('convert-octal').addEventListener('click', function() {
-      const decimal = parseInt(document.getElementById('octal-input').value);
-      
-      if (isNaN(decimal) || decimal < 0) {
-        showMessage('octal-results', 'Please enter a valid positive number.', '#ff6b9d');
-        return;
-      }
-
-      const resultsDiv = document.getElementById('octal-results');
-      resultsDiv.classList.remove('hidden');
-
-      let html = `
-        <div class="cyber-border p-6 rounded-lg" style="background: rgba(10, 14, 39, 0.9);">
-          <h3 class="text-xl font-bold mb-4" style="color: #00d4ff;">⎕ Decimal to Octal Conversion</h3>
-          
-          <div class="result-box p-4 rounded mb-4">
-            <p class="text-2xl font-bold mb-2">Decimal: ${decimal} → Octal: ${decimal.toString(8)}</p>
-          </div>
-
-          <h4 class="text-lg font-bold mb-3" style="color: #00d4ff;">Step-by-Step Process:</h4>
-          <div class="space-y-2">
-      `;
-
-      let num = decimal;
-      let step = 1;
-      const steps = [];
-
-      while (num > 0) {
-        const remainder = num % 8;
-        steps.push({ quotient: Math.floor(num / 8), remainder });
-        num = Math.floor(num / 8);
-      }
-
-      steps.forEach((s, i) => {
-        const currentNum = i === 0 ? decimal : steps[i-1].quotient;
-        html += `
-          <div class="step-item p-3 rounded">
-            <span class="font-bold" style="color: #00d4ff;">Step ${i + 1}:</span> 
-            ${currentNum} ÷ 8 = ${s.quotient} remainder ${s.remainder}
-          </div>
-        `;
+    // Core toggles
+    document.querySelectorAll('.core-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = parseInt(btn.dataset.core);
+        coreStates[i] = coreStates[i] ? 0 : 1;
+        updateCores();
       });
-
-      html += `
-          </div>
-          <div class="result-box p-4 rounded mt-4">
-            <p class="font-bold">Read remainders from bottom to top: ${decimal.toString(8)}</p>
-          </div>
-        </div>
-      `;
-
-      resultsDiv.innerHTML = html;
     });
 
-    // Linear Solver
-    document.getElementById('solve-linear').addEventListener('click', function() {
-      const a = parseFloat(document.getElementById('linear-a').value) || 0;
-      const b = parseFloat(document.getElementById('linear-b').value) || 0;
-
-      const resultsDiv = document.getElementById('linear-results');
-      resultsDiv.classList.remove('hidden');
-
-      if (a === 0) {
-        if (b === 0) {
-          showMessage('linear-results', 'Infinite solutions (0 = 0)', '#00ff88');
-        } else {
-          showMessage('linear-results', 'No solution (contradiction)', '#ff6b9d');
-        }
-        return;
-      }
-
-      const solution = -b / a;
-
-      let html = `
-        <div class="cyber-border p-6 rounded-lg" style="background: rgba(10, 14, 39, 0.9);">
-          <h3 class="text-xl font-bold mb-4" style="color: #7b2ff7;">⎕ Linear Equation Solution</h3>
-          
-          <div class="result-box p-4 rounded mb-4">
-            <p class="text-2xl font-bold">x = ${solution.toFixed(4)}</p>
-          </div>
-
-          <h4 class="text-lg font-bold mb-3" style="color: #7b2ff7;">Solution Steps:</h4>
-          <div class="space-y-2">
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 1:</span> Equation: ${a}x + ${b} = 0
-            </div>
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 2:</span> Isolate x: ${a}x = ${-b}
-            </div>
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 3:</span> Divide by ${a}: x = ${-b}/${a} = ${solution.toFixed(4)}
-            </div>
-          </div>
-
-          <div class="result-box p-4 rounded mt-4">
-            <h4 class="font-bold mb-2" style="color: #00ff88;">✓ Verification:</h4>
-            <p>${a}(${solution.toFixed(4)}) + ${b} = ${(a * solution + b).toFixed(6)} ≈ 0</p>
-          </div>
-        </div>
-      `;
-
-      resultsDiv.innerHTML = html;
-    });
-
-    // Percentage Calculator
-    document.getElementById('calculate-percent').addEventListener('click', function() {
-      const percent = parseFloat(document.getElementById('percent-value').value);
-      const total = parseFloat(document.getElementById('percent-total').value);
-
-      if (isNaN(percent) || isNaN(total)) {
-        showMessage('percent-results', 'Please enter valid numbers.', '#ff6b9d');
-        return;
-      }
-
-      const result = (percent / 100) * total;
-
-      const resultsDiv = document.getElementById('percent-results');
-      resultsDiv.classList.remove('hidden');
-
-      let html = `
-        <div class="cyber-border p-6 rounded-lg" style="background: rgba(10, 14, 39, 0.9);">
-          <h3 class="text-xl font-bold mb-4" style="color: #ff6b9d;">⎕ Percentage Calculation</h3>
-          
-          <div class="result-box p-4 rounded mb-4">
-            <p class="text-2xl font-bold">${percent}% of ${total} = ${result.toFixed(4)}</p>
-          </div>
-
-          <h4 class="text-lg font-bold mb-3" style="color: #ff6b9d;">Calculation Steps:</h4>
-          <div class="space-y-2">
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 1:</span> Convert percentage to decimal: ${percent}% = ${(percent/100).toFixed(4)}
-            </div>
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Step 2:</span> Multiply: ${(percent/100).toFixed(4)} × ${total} = ${result.toFixed(4)}
-            </div>
-          </div>
-        </div>
-      `;
-
-      resultsDiv.innerHTML = html;
-    });
-
-    // Factorial Calculator
-    document.getElementById('calculate-factorial').addEventListener('click', function() {
-      const n = parseInt(document.getElementById('factorial-input').value);
-
-      if (isNaN(n) || n < 0 || n > 170) {
-        showMessage('factorial-results', 'Please enter a number between 0 and 170.', '#ff6b9d');
-        return;
-      }
-
-      const resultsDiv = document.getElementById('factorial-results');
-      resultsDiv.classList.remove('hidden');
-
-      let factorial = 1;
-      const steps = [];
-
-      for (let i = 1; i <= n; i++) {
-        factorial *= i;
-        if (i <= 10 || i === n) {
-          steps.push({ step: i, value: factorial });
-        }
-      }
-
-      let html = `
-        <div class="cyber-border p-6 rounded-lg" style="background: rgba(10, 14, 39, 0.9);">
-          <h3 class="text-xl font-bold mb-4" style="color: #ffd700;">⎕ Factorial Calculation</h3>
-          
-          <div class="result-box p-4 rounded mb-4">
-            <p class="text-2xl font-bold">${n}! = ${factorial.toExponential(4)}</p>
-          </div>
-
-          <h4 class="text-lg font-bold mb-3" style="color: #ffd700;">Calculation Process:</h4>
-          <div class="space-y-2">
-            <div class="step-item p-3 rounded">
-              <span class="font-bold" style="color: #00d4ff;">Definition:</span> ${n}! = ${n} × ${n-1} × ${n-2} × ... × 2 × 1
-            </div>
-      `;
-
-      steps.forEach(s => {
-        html += `
-          <div class="step-item p-3 rounded">
-            <span class="font-bold" style="color: #00d4ff;">${s.step}!:</span> ${s.value.toExponential(4)}
-          </div>
-        `;
+    function updateCores() {
+      coreStates.forEach((state, i) => {
+        const el = document.getElementById('core-' + i);
+        if (el) { el.setAttribute('class', state ? 'core-active' : 'core-idle'); }
       });
-
-      html += `
-          </div>
-        </div>
-      `;
-
-      resultsDiv.innerHTML = html;
-    });
-
-    function showMessage(divId, message, color) {
-      const div = document.getElementById(divId);
-      div.classList.remove('hidden');
-      div.innerHTML = `
-        <div class="cyber-border p-6 rounded-lg" style="background: rgba(10, 14, 39, 0.9);">
-          <p class="text-lg" style="color: ${color};">${message}</p>
-        </div>
-      `;
+      const active = coreStates.filter(s => s).length;
+      const metricEl = document.getElementById('metric-cores');
+      if (metricEl) metricEl.textContent = `Active Cores: ${active}/8`;
+      const binEl = document.getElementById('metric-binary');
+      if (binEl) binEl.textContent = `Binary: ${coreStates.join('')}`;
+      updateLED(parseInt(coreStates.join(''), 2));
     }
 
-    // Auto-select first module on load
-    setTimeout(() => {
-      document.querySelector('[data-module="quadratic"]').click();
-    }, 100);
+    function solveOctal() {
+      const n = parseInt(document.getElementById('octal-input').value);
+      if (isNaN(n)) return;
+      const steps = [{ label: 'Giriş (Decimal)', value: n }];
+      let num = Math.abs(n), octal = '', divSteps = [];
+      if (num === 0) { octal = '0'; divSteps.push('0 ÷ 8 = 0 kalan 0'); }
+      else { let temp = num; while (temp > 0) { divSteps.push(`${temp} ÷ 8 = ${Math.floor(temp/8)} kalan ${temp%8}`); octal = (temp % 8) + octal; temp = Math.floor(temp / 8); } }
+      steps.push({ label: 'Bölme Adımları', value: divSteps.join('<br>') });
+      steps.push({ label: 'Kalanları alttan yukarı oku', value: `Octal: ${octal}₈` });
+      steps.push({ label: 'Doğrulama', value: `${octal}₈ → ${parseInt(octal, 8)}₁₀ ✓` });
+      const bin = updateLED(n);
+      document.getElementById('octal-result').innerHTML = `<div class="border border-green-800 rounded p-3">${stepHTML(steps)}<div class="mt-2 p-2 bg-green-900 rounded text-center font-bold">${n}₁₀ = ${octal}₈ = ${bin}₂</div></div>`;
+      saveRecord('octal', String(n), octal + '₈', bin);
+    }
+
+    function solveQuadratic() {
+      const a = parseFloat(document.getElementById('qa').value), b = parseFloat(document.getElementById('qb').value), c = parseFloat(document.getElementById('qc').value);
+      if (isNaN(a)||a===0||isNaN(b)||isNaN(c)) return;
+      const D = b*b - 4*a*c;
+      let badge = '', steps = [];
+      steps.push({ label: 'Denklem', value: `${a}x² + ${b}x + ${c} = 0` });
+      steps.push({ label: 'Diskriminant (Δ)', value: `Δ = b²-4ac = ${b}²-4·${a}·${c} = ${D}` });
+      if (D > 0) { badge = '<span class="badge" style="background:#10b981;color:#000">Δ > 0 (İki gerçek kök)</span>'; const sq = Math.sqrt(D); const x1 = (-b+sq)/(2*a), x2 = (-b-sq)/(2*a); steps.push({label:'Kök Formülü',value:`x = (-b±√Δ)/(2a) → x₁=${x1.toFixed(4)}, x₂=${x2.toFixed(4)}`}); steps.push({label:'Çarpanlara Ayırma',value:`${a}(x - ${x1.toFixed(3)})(x - ${x2.toFixed(3)}) = 0`}); steps.push({label:'Doğrulama x₁',value:`${a}·(${x1.toFixed(3)})² + ${b}·(${x1.toFixed(3)}) + ${c} ≈ ${(a*x1*x1+b*x1+c).toFixed(6)}`}); const bin = updateLED(Math.abs(Math.round(x1))); saveRecord('quadratic',`${a}x²+${b}x+${c}=0`,`x₁=${x1.toFixed(4)}, x₂=${x2.toFixed(4)}`,bin);
+      } else if (D === 0) { badge = '<span class="badge" style="background:#f59e0b;color:#000">Δ = 0 (Tek kök)</span>'; const x = -b/(2*a); steps.push({label:'Tek Kök',value:`x = -b/(2a) = ${x.toFixed(4)}`}); steps.push({label:'Doğrulama',value:`${a}·(${x.toFixed(3)})² + ${b}·(${x.toFixed(3)}) + ${c} ≈ ${(a*x*x+b*x+c).toFixed(6)}`}); const bin = updateLED(Math.abs(Math.round(x))); saveRecord('quadratic',`${a}x²+${b}x+${c}=0`,`x=${x.toFixed(4)}`,bin);
+      } else { badge = '<span class="badge" style="background:#ef4444;color:#fff">Δ < 0 (Kompleks kökler)</span>'; const real = (-b/(2*a)).toFixed(4), imag = (Math.sqrt(-D)/(2*a)).toFixed(4); steps.push({label:'Kompleks Kökler',value:`x = ${real} ± ${imag}i`}); const bin = updateLED(Math.abs(Math.round(parseFloat(real)))); saveRecord('quadratic',`${a}x²+${b}x+${c}=0`,`${real}±${imag}i`,bin);
+      }
+      document.getElementById('quad-result').innerHTML = `<div class="border border-green-800 rounded p-3">${badge}<div class="mt-2">${stepHTML(steps)}</div></div>`;
+    }
+
+    function solveLinear() {
+      const a = parseFloat(document.getElementById('la').value), b = parseFloat(document.getElementById('lb').value);
+      if (isNaN(a)||a===0||isNaN(b)) return;
+      const x = -b/a;
+      const steps = [{label:'Denklem',value:`${a}x + ${b} = 0`},{label:'Adım 1',value:`${a}x = ${-b}`},{label:'Adım 2',value:`x = ${-b}/${a} = ${x.toFixed(4)}`},{label:'Doğrulama',value:`${a}·(${x.toFixed(4)}) + ${b} = ${(a*x+b).toFixed(6)} ≈ 0 ✓`}];
+      const bin = updateLED(Math.abs(Math.round(x)));
+      document.getElementById('linear-result').innerHTML = `<div class="border border-green-800 rounded p-3">${stepHTML(steps)}<div class="mt-2 p-2 bg-green-900 rounded text-center font-bold">x = ${x.toFixed(4)}</div></div>`;
+      saveRecord('linear',`${a}x+${b}=0`,x.toFixed(4),bin);
+    }
+
+    function solvePercent() {
+      const val = parseFloat(document.getElementById('pval').value), pct = parseFloat(document.getElementById('ppct').value);
+      if (isNaN(val)||isNaN(pct)) return;
+      const res = val * pct / 100;
+      const steps = [{label:'İşlem',value:`${val} × ${pct}% = ${val} × ${pct}/100`},{label:'Hesaplama',value:`= ${val} × ${(pct/100).toFixed(4)} = ${res.toFixed(4)}`},{label:'Oran',value:`${res.toFixed(2)} / ${val} = ${(pct/100).toFixed(4)} = %${pct}`}];
+      const bin = updateLED(Math.abs(Math.round(res)));
+      document.getElementById('percent-result').innerHTML = `<div class="border border-green-800 rounded p-3">${stepHTML(steps)}<div class="mt-2 p-2 bg-green-900 rounded text-center font-bold">%${pct} of ${val} = ${res.toFixed(4)}</div></div>`;
+      saveRecord('percent',`%${pct} of ${val}`,res.toFixed(4),bin);
+    }
+
+    function solveFactorial() {
+      const n = parseInt(document.getElementById('fact-input').value);
+      if (isNaN(n)||n<0||n>20) return;
+      let result = 1, seq = [];
+      for (let i = 1; i <= n; i++) { result *= i; seq.push(i); }
+      if (n === 0) { result = 1; seq = ['1']; }
+      const steps = [{label:'Tanım',value:`${n}! = ${seq.join(' × ')}`},{label:'Hesaplama',value:`= ${result}`}];
+      const bin = updateLED(result % 256);
+      document.getElementById('factorial-result').innerHTML = `<div class="border border-green-800 rounded p-3">${stepHTML(steps)}<div class="mt-2 p-2 bg-green-900 rounded text-center font-bold">${n}! = ${result}</div></div>`;
+      saveRecord('factorial',`${n}!`,String(result),bin);
+    }
+
+    lucide.createIcons();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f90cfb067f4ed',t:'MTc2OTkyOTE2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
-             <!-- Pay -->                            
-         <section id="services" class="py-20 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-4 glow-text">Pay</h2>
-                <p class="text-xl text-gray-400">Code</p>
-                <div class="w-32 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-4"></div>
-        <h3 class="cyber-font text-2xl font-bold text-cyan-400 mb-6 glow-text">Paylaşma, Geliştirme</h3>
-                   <section id="domain-site-network" class="py-20 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">   
-       <a href="<!doctype html>
-<html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Futuristic Code Management Interface</title>
-  <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Orbitron', monospace;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
-            color: #e0e6ed;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(64, 224, 255, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-            animation: backgroundPulse 8s ease-in-out infinite;
-        }
-        
-        @keyframes backgroundPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(64, 224, 255, 0.3);
-        }
-        
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #40e0ff, #8a2be2, #40e0ff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(64, 224, 255, 0.8)) 
-                    drop-shadow(0 0 30px rgba(138, 43, 226, 0.6))
-                    drop-shadow(0 0 45px rgba(64, 224, 255, 0.4));
-            animation: logoGlow 4s ease-in-out infinite, gradientShift 3s linear infinite;
-        }
-        
-        @keyframes logoGlow {
-            0%, 100% { 
-                filter: drop-shadow(0 0 15px rgba(64, 224, 255, 0.8)) 
-                        drop-shadow(0 0 30px rgba(138, 43, 226, 0.6))
-                        drop-shadow(0 0 45px rgba(64, 224, 255, 0.4));
-            }
-            50% { 
-                filter: drop-shadow(0 0 25px rgba(64, 224, 255, 1)) 
-                        drop-shadow(0 0 50px rgba(138, 43, 226, 0.8))
-                        drop-shadow(0 0 75px rgba(64, 224, 255, 0.6));
-            }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-        
-        .stats {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 15px 25px;
-            background: rgba(64, 224, 255, 0.08);
-            border: 2px solid rgba(64, 224, 255, 0.4);
-            border-radius: 12px;
-            backdrop-filter: blur(15px);
-            transition: all 0.4s ease;
-            box-shadow: 0 0 20px rgba(64, 224, 255, 0.2);
-        }
-        
-        .stat-item:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 0 30px rgba(64, 224, 255, 0.4), 0 0 60px rgba(138, 43, 226, 0.2);
-            border-color: rgba(64, 224, 255, 0.6);
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #40e0ff;
-            text-shadow: 0 0 20px rgba(64, 224, 255, 0.9), 
-                         0 0 40px rgba(64, 224, 255, 0.6),
-                         0 0 60px rgba(138, 43, 226, 0.4);
-            animation: statGlow 3s ease-in-out infinite alternate;
-        }
-        
-        @keyframes statGlow {
-            0% { 
-                text-shadow: 0 0 20px rgba(64, 224, 255, 0.9), 
-                             0 0 40px rgba(64, 224, 255, 0.6),
-                             0 0 60px rgba(138, 43, 226, 0.4);
-                transform: scale(1);
-            }
-            100% { 
-                text-shadow: 0 0 30px rgba(64, 224, 255, 1), 
-                             0 0 60px rgba(64, 224, 255, 0.8),
-                             0 0 90px rgba(138, 43, 226, 0.6);
-                transform: scale(1.05);
-            }
-        }
-        
-        .stat-label {
-            font-size: 0.8rem;
-            color: #b0b6c3;
-            margin-top: 5px;
-        }
-        
-        .filters {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 14px 28px;
-            background: rgba(138, 43, 226, 0.25);
-            border: 2px solid rgba(138, 43, 226, 0.6);
-            border-radius: 30px;
-            color: #e0e6ed;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Orbitron', monospace;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .filter-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(64, 224, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-        
-        .filter-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        .filter-btn:hover, .filter-btn.active {
-            background: rgba(138, 43, 226, 0.6);
-            box-shadow: 0 0 30px rgba(138, 43, 226, 1), 
-                        0 0 60px rgba(64, 224, 255, 0.6),
-                        0 0 90px rgba(138, 43, 226, 0.4);
-            transform: translateY(-4px) scale(1.08);
-            border-color: rgba(64, 224, 255, 0.8);
-        }
-        
-        .filter-btn.active {
-            background: rgba(64, 224, 255, 0.3);
-            border-color: rgba(64, 224, 255, 0.9);
-        }
-        
-        .code-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .code-card {
-            background: rgba(26, 26, 46, 0.85);
-            border: 2px solid rgba(64, 224, 255, 0.4);
-            border-radius: 18px;
-            padding: 28px;
-            backdrop-filter: blur(15px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .code-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(64, 224, 255, 0.15), transparent);
-            transition: left 0.7s ease;
-        }
-        
-        .code-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(64, 224, 255, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .code-card:hover::after {
-            opacity: 1;
-        }
-        
-        .code-card:hover::before {
-            left: 100%;
-        }
-        
-        .code-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(64, 224, 255, 0.5), 
-                        0 0 40px rgba(138, 43, 226, 0.4),
-                        inset 0 0 30px rgba(64, 224, 255, 0.1);
-            border-color: rgba(64, 224, 255, 0.9);
-            background: rgba(26, 26, 46, 0.95);
-        }
-        
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .category-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            background: linear-gradient(135deg, #40e0ff, #8a2be2);
-            box-shadow: 0 0 25px rgba(64, 224, 255, 0.7), 
-                        0 0 50px rgba(138, 43, 226, 0.5),
-                        inset 0 0 15px rgba(255, 255, 255, 0.2);
-            animation: iconPulse 4s ease-in-out infinite;
-            position: relative;
-        }
-        
-        .category-icon::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #40e0ff, #8a2be2);
-            opacity: 0;
-            filter: blur(8px);
-            transition: opacity 0.4s ease;
-        }
-        
-        .code-card:hover .category-icon::before {
-            opacity: 0.6;
-        }
-        
-        @keyframes iconPulse {
-            0%, 100% { 
-                box-shadow: 0 0 25px rgba(64, 224, 255, 0.7), 
-                            0 0 50px rgba(138, 43, 226, 0.5),
-                            inset 0 0 15px rgba(255, 255, 255, 0.2);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 35px rgba(64, 224, 255, 0.9), 
-                            0 0 70px rgba(138, 43, 226, 0.7),
-                            inset 0 0 20px rgba(255, 255, 255, 0.3);
-                transform: scale(1.05);
-            }
-        }
-        
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #40e0ff;
-            margin-bottom: 10px;
-            text-shadow: 0 0 15px rgba(64, 224, 255, 0.5);
-            transition: all 0.3s ease;
-        }
-        
-        .code-card:hover .card-title {
-            text-shadow: 0 0 20px rgba(64, 224, 255, 0.8), 0 0 40px rgba(64, 224, 255, 0.4);
-            transform: translateX(5px);
-        }
-        
-        .card-description {
-            color: #b0b6c3;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            margin-bottom: 15px;
-        }
-        
-        .code-preview {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(64, 224, 255, 0.2);
-            border-radius: 8px;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            color: #40e0ff;
-            margin-bottom: 15px;
-            overflow-x: auto;
-        }
-        
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .card-tags {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .tag {
-            padding: 4px 12px;
-            background: rgba(138, 43, 226, 0.3);
-            border-radius: 12px;
-            font-size: 0.7rem;
-            color: #e0e6ed;
-        }
-        
-        .card-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .action-btn {
-            width: 38px;
-            height: 38px;
-            border: 2px solid rgba(64, 224, 255, 0.5);
-            background: rgba(64, 224, 255, 0.12);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            color: #40e0ff;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle, rgba(64, 224, 255, 0.3) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .action-btn:hover::before {
-            opacity: 1;
-        }
-        
-        .action-btn:hover {
-            background: rgba(64, 224, 255, 0.25);
-            box-shadow: 0 0 20px rgba(64, 224, 255, 0.6), 0 0 40px rgba(64, 224, 255, 0.3);
-            transform: scale(1.15) rotate(5deg);
-            border-color: rgba(64, 224, 255, 0.8);
-        }
-        
-        .floating-panel {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(26, 26, 46, 0.92);
-            border: 2px solid rgba(64, 224, 255, 0.6);
-            border-radius: 18px;
-            padding: 25px;
-            backdrop-filter: blur(20px);
-            width: 280px;
-            box-shadow: 0 0 35px rgba(64, 224, 255, 0.4), 
-                        0 0 70px rgba(138, 43, 226, 0.3),
-                        inset 0 0 25px rgba(64, 224, 255, 0.05);
-            animation: panelGlow 5s ease-in-out infinite alternate;
-            z-index: 10;
-        }
-        
-        @keyframes panelGlow {
-            0% { 
-                box-shadow: 0 0 35px rgba(64, 224, 255, 0.4), 
-                            0 0 70px rgba(138, 43, 226, 0.3),
-                            inset 0 0 25px rgba(64, 224, 255, 0.05);
-                border-color: rgba(64, 224, 255, 0.6);
-            }
-            100% { 
-                box-shadow: 0 0 45px rgba(64, 224, 255, 0.6), 
-                            0 0 90px rgba(138, 43, 226, 0.4),
-                            inset 0 0 35px rgba(64, 224, 255, 0.08);
-                border-color: rgba(64, 224, 255, 0.8);
-            }
-        }
-        
-        .panel-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #40e0ff;
-            margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 0 0 15px rgba(64, 224, 255, 0.6), 0 0 30px rgba(64, 224, 255, 0.3);
-            letter-spacing: 1px;
-        }
-        
-        .activity-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(64, 224, 255, 0.1);
-        }
-        
-        .activity-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #40e0ff;
-            box-shadow: 0 0 15px rgba(64, 224, 255, 0.8), 0 0 30px rgba(64, 224, 255, 0.4);
-            position: relative;
-        }
-        
-        .activity-dot::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            background: rgba(64, 224, 255, 0.3);
-            filter: blur(5px);
-        }
-        
-        .activity-text {
-            font-size: 0.8rem;
-            color: #b0b6c3;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { 
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% { 
-                opacity: 0.4;
-                transform: scale(0.9);
-            }
-        }
-        
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .float {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .stats {
-                gap: 15px;
-            }
-            
-            .floating-panel {
-                position: static;
-                transform: none;
-                width: 100%;
-                margin-top: 30px;
-            }
-            
-            .code-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
- </head>
- <body>
-  <div class="container">
-   <header class="header">
-    <div class="logo pulse">
-     CodeNexus
-    </div>
-    <div class="stats">
-     <div class="stat-item">
-      <div class="stat-number" id="totalCodes">
-       247
-      </div>
-      <div class="stat-label">
-       Total Codes
-      </div>
-     </div>
-     <div class="stat-item">
-      <div class="stat-number" id="activeCodes">
-       18
-      </div>
-      <div class="stat-label">
-       Active
-      </div>
-     </div>
-     <div class="stat-item">
-      <div class="stat-number" id="categories">
-       12
-      </div>
-      <div class="stat-label">
-       Categories
-      </div>
-     </div>
-    </div>
-   </header>
-   <div class="filters"><button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn" data-filter="frontend">Frontend</button> <button class="filter-btn" data-filter="backend">Backend</button> <button class="filter-btn" data-filter="ai">AI/ML</button> <button class="filter-btn" data-filter="mobile">Mobile</button> <button class="filter-btn" data-filter="database">Database</button>
-   </div>
-   <div class="code-grid" id="codeGrid">
-    <div class="code-card float" data-category="frontend">
-     <div class="card-header">
-      <div class="category-icon">
-       🎨
-      </div>
-      <div class="card-actions">
-       <div class="action-btn" onclick="viewCode(1)">
-        👁️
-       </div>
-       <div class="action-btn" onclick="editCode(1)">
-        ✏️
-       </div>
-       <div class="action-btn" onclick="shareCode(1)">
-        🔗
-       </div>
-      </div>
-     </div>
-     <div class="card-title">
-      Neural UI Components
-     </div>
-     <div class="card-description">
-      Advanced React components with AI-powered animations and adaptive layouts
-     </div>
-     <div class="code-preview">
-      const NeuralButton = ({ children, ...props }) =&gt; { const [isActive, setActive] = useState(false); return ( &lt;button className="neural-btn" {...props}&gt; {children} &lt;/button&gt; ); };
-     </div>
-     <div class="card-footer">
-      <div class="card-tags"><span class="tag">React</span> <span class="tag">TypeScript</span>
-      </div>
-     </div>
-    </div>
-    <div class="code-card" data-category="ai">
-     <div class="card-header">
-      <div class="category-icon">
-       🧠
-      </div>
-      <div class="card-actions">
-       <div class="action-btn" onclick="viewCode(2)">
-        👁️
-       </div>
-       <div class="action-btn" onclick="editCode(2)">
-        ✏️
-       </div>
-       <div class="action-btn" onclick="shareCode(2)">
-        🔗
-       </div>
-      </div>
-     </div>
-     <div class="card-title">
-      Quantum Learning Algorithm
-     </div>
-     <div class="card-description">
-      Next-gen machine learning model with quantum-inspired optimization
-     </div>
-     <div class="code-preview">
-      class QuantumNeuralNet: def __init__(self, qubits=8): self.qubits = qubits self.circuit = QuantumCircuit(qubits) def forward(self, x): return self.quantum_transform(x)
-     </div>
-     <div class="card-footer">
-      <div class="card-tags"><span class="tag">Python</span> <span class="tag">Qiskit</span>
-      </div>
-     </div>
-    </div>
-    <div class="code-card" data-category="backend">
-     <div class="card-header">
-      <div class="category-icon">
-       ⚡
-      </div>
-      <div class="card-actions">
-       <div class="action-btn" onclick="viewCode(3)">
-        👁️
-       </div>
-       <div class="action-btn" onclick="editCode(3)">
-        ✏️
-       </div>
-       <div class="action-btn" onclick="shareCode(3)">
-        🔗
-       </div>
-      </div>
-     </div>
-     <div class="card-title">
-      Hyperspace API Gateway
-     </div>
-     <div class="card-description">
-      Ultra-fast API gateway with real-time load balancing and auto-scaling
-     </div>
-     <div class="code-preview">
-      app.use('/api', hyperspaceGateway({ routes: dynamicRoutes, loadBalancer: 'quantum', autoScale: true, metrics: realTimeMetrics }));
-     </div>
-     <div class="card-footer">
-      <div class="card-tags"><span class="tag">Node.js</span> <span class="tag">GraphQL</span>
-      </div>
-     </div>
-    </div>
-    <div class="code-card" data-category="mobile">
-     <div class="card-header">
-      <div class="category-icon">
-       📱
-      </div>
-      <div class="card-actions">
-       <div class="action-btn" onclick="viewCode(4)">
-        👁️
-       </div>
-       <div class="action-btn" onclick="editCode(4)">
-        ✏️
-       </div>
-       <div class="action-btn" onclick="shareCode(4)">
-        🔗
-       </div>
-      </div>
-     </div>
-     <div class="card-title">
-      Holographic Interface
-     </div>
-     <div class="card-description">
-      AR/VR mobile interface with gesture recognition and spatial computing
-     </div>
-     <div class="code-preview">
-      struct HolographicView: View { @State private var gestureState = GestureState() var body: some View { ARViewContainer() .gesture(spatialGesture) } }
-     </div>
-     <div class="card-footer">
-      <div class="card-tags"><span class="tag">SwiftUI</span> <span class="tag">ARKit</span>
-      </div>
-     </div>
-    </div>
-    <div class="code-card" data-category="database">
-     <div class="card-header">
-      <div class="category-icon">
-       🗄️
-      </div>
-      <div class="card-actions">
-       <div class="action-btn" onclick="viewCode(5)">
-        👁️
-       </div>
-       <div class="action-btn" onclick="editCode(5)">
-        ✏️
-       </div>
-       <div class="action-btn" onclick="shareCode(5)">
-        🔗
-       </div>
-      </div>
-     </div>
-     <div class="card-title">
-      Temporal Database Engine
-     </div>
-     <div class="card-description">
-      Time-series database with predictive caching and quantum encryption
-     </div>
-     <div class="code-preview">
-      CREATE TEMPORAL TABLE user_events ( id UUID PRIMARY KEY, event_data JSONB, timestamp TIMESTAMPTZ, TEMPORAL PERIOD FOR SYSTEM_TIME ) WITH QUANTUM_ENCRYPTION;
-     </div>
-     <div class="card-footer">
-      <div class="card-tags"><span class="tag">PostgreSQL</span> <span class="tag">TimescaleDB</span>
-      </div>
-     </div>
-    </div>
-    <div class="code-card" data-category="frontend">
-     <div class="card-header">
-      <div class="category-icon">
-       🌐
-      </div>
-      <div class="card-actions">
-       <div class="action-btn" onclick="viewCode(6)">
-        👁️
-       </div>
-       <div class="action-btn" onclick="editCode(6)">
-        ✏️
-       </div>
-       <div class="action-btn" onclick="shareCode(6)">
-        🔗
-       </div>
-      </div>
-     </div>
-     <div class="card-title">
-      Quantum CSS Framework
-     </div>
-     <div class="card-description">
-      Next-generation CSS framework with AI-powered responsive design
-     </div>
-     <div class="code-preview">
-      .quantum-grid { display: quantum-flex; quantum-adapt: viewport-aware; neural-spacing: auto-optimize; @quantum-media (mind-reading) { layout: user-preference; } }
-     </div>
-     <div class="card-footer">
-      <div class="card-tags"><span class="tag">CSS</span> <span class="tag">Sass</span>
-      </div>
-     </div>
-    </div>
-   </div>
-  </div>
-  <div class="floating-panel">
-   <div class="panel-title">
-    Live Activity
-   </div>
-   <div class="activity-item">
-    <div class="activity-dot pulse"></div>
-    <div class="activity-text">
-     Neural UI deployed
-    </div>
-   </div>
-   <div class="activity-item">
-    <div class="activity-dot"></div>
-    <div class="activity-text">
-     API Gateway updated
-    </div>
-   </div>
-   <div class="activity-item">
-    <div class="activity-dot pulse"></div>
-    <div class="activity-text">
-     New quantum model trained
-    </div>
-   </div>
-   <div class="activity-item">
-    <div class="activity-dot"></div>
-    <div class="activity-text">
-     Database optimized
-    </div>
-   </div>
-   <div class="activity-item">
-    <div class="activity-dot pulse"></div>
-    <div class="activity-text">
-     Holographic UI tested
-    </div>
-   </div>
-  </div>
-  <script>
-        // Filter functionality
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const codeCards = document.querySelectorAll('.code-card');
-        
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
-                btn.classList.add('active');
-                
-                const filter = btn.dataset.filter;
-                
-                codeCards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter) {
-                        card.style.display = 'block';
-                        card.style.animation = 'fadeIn 0.5s ease';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-        
-        // Real-time stats animation
-        function updateStats() {
-            const totalCodes = document.getElementById('totalCodes');
-            const activeCodes = document.getElementById('activeCodes');
-            const categories = document.getElementById('categories');
-            
-            // Simulate real-time updates
-            setInterval(() => {
-                const currentTotal = parseInt(totalCodes.textContent);
-                if (Math.random() > 0.7) {
-                    totalCodes.textContent = currentTotal + 1;
-                    totalCodes.style.animation = 'pulse 0.5s ease';
-                }
-                
-                const currentActive = parseInt(activeCodes.textContent);
-                if (Math.random() > 0.8) {
-                    activeCodes.textContent = Math.max(1, currentActive + (Math.random() > 0.5 ? 1 : -1));
-                    activeCodes.style.animation = 'pulse 0.5s ease';
-                }
-            }, 3000);
-        }
-        
-        // Code card interactions
-        function viewCode(id) {
-            console.log(`Viewing code ${id}`);
-            // Simulate code viewer opening
-            alert(`Opening code viewer for project ${id}...`);
-        }
-        
-        function editCode(id) {
-            console.log(`Editing code ${id}`);
-            // Simulate code editor opening
-            alert(`Opening code editor for project ${id}...`);
-        }
-        
-        function shareCode(id) {
-            console.log(`Sharing code ${id}`);
-            // Simulate sharing functionality
-            alert(`Generating share link for project ${id}...`);
-        }
-        
-        // Add floating animation to cards
-        function addFloatingAnimation() {
-            const cards = document.querySelectorAll('.code-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.2}s`;
-            });
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            updateStats();
-            addFloatingAnimation();
-            
-            // Add CSS animation keyframes
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-            `;
-            document.head.appendChild(style);
-        });
-        
-        // Smooth scroll and parallax effects
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.floating-panel');
-            if (parallax) {
-                parallax.style.transform = `translateY(calc(-50% + ${scrolled * 0.1}px))`;
-            }
-        });
-    </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f4ad9534fde3c',t:'MTc2OTkyNjI5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a00aa0097daf4860',t:'MTc3OTYwODE0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
                                      
    <!-- Footer -->
